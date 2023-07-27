@@ -30,6 +30,7 @@ import searchicon from './logos/lupa.png'
         await api.get('/getusers').then(
             res=>{
                 setUsers(res.data)
+                console.log(users)
                 if(res.data){
                     setRotating(false)
                 }

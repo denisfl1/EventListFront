@@ -131,14 +131,14 @@ function Participate(props){
    
       
         SOCKET.on('participate',(list)=>{
-        
+      
             setallData([list])
             setDate(list.date)
             setTime(list.time)
             setExtraTime(list.extratime)
             setBtn(list.lockbtn)
          
-            if(alldata){
+            if([list]){
                 setRotating(false)
             }
 
