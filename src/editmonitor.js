@@ -37,7 +37,7 @@ function AddMonitor(props){
 
             
         },error=>{
-            console.log(error)
+            
         }
 
     )}
@@ -48,7 +48,7 @@ function AddMonitor(props){
 
 
     const UpdateNamesandFills = async (event)=>{
-        // event.preventDefault()
+ 
 
 
         if(!names.trim()){
@@ -57,7 +57,7 @@ function AddMonitor(props){
 
             await api.put("/updatenamesandfills",{id,position,names,fills1}).then
             (res =>{
-                console.log("Alterado com Sucesso")
+              
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -73,7 +73,7 @@ function AddMonitor(props){
                   })
              
               },error=>{
-                console.log(error)
+                
               })
               
               props.hidecontaineredit()

@@ -23,8 +23,6 @@ function Participate(props){
     const [monitorcontainer,setMonitorcontainer] = useState()
     const [monitoreditcontainer,setMonitoreditcontainer] = useState()
     const [position,setPosition] = useState()
-    const [names,setNames] = useState()
-    const [fills,setFills] = useState()
     const [alldata,setallData] = useState()
     const [btn,setBtn] = useState()
     const [userid,setuserid]= useState()
@@ -85,11 +83,6 @@ function Participate(props){
     const delmonitor = async (event)=>{
     
     const position = event.target.id
-    const position2 = event.target.name
-    console.log(position)
-    console.log(position2)
-
-   
         
         
     await api.put(`/delnamesandfills/${id}`,{position}).then(
@@ -107,7 +100,7 @@ function Participate(props){
    
              
               })
-            console.log(res.data)
+    
         },error=>{
             
             Swal.fire({
@@ -124,7 +117,7 @@ function Participate(props){
             
                  
               })
-            console.log(error)
+         
 
         }
     )
@@ -138,14 +131,14 @@ function Participate(props){
    
       
         SOCKET.on('participate',(list)=>{
-            // console.log(list)
+        
             setallData([list])
             setDate(list.date)
             setTime(list.time)
             setExtraTime(list.extratime)
             setBtn(list.lockbtn)
          
-            if(alldata[0]){
+            if(alldata){
                 setRotating(false)
             }
 
@@ -180,7 +173,7 @@ function Participate(props){
         
             await api.get('/getuser').then(
                 res=>{
-                    // console.log(res.data)
+                   
                     const {id,name,admin} = res.data
                     setuserid(id)
                     setusername(name)
@@ -188,8 +181,7 @@ function Participate(props){
                
         
                 },error=>{
-                   
-                    console.log(error)
+
                 }
              )   
     

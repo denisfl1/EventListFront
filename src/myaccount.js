@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { api } from "./api";
-import { AuthContext } from "./authcontroller";
-
 
 
 function MyAccount(props){
@@ -33,7 +31,7 @@ function MyAccount(props){
             }else{
             error.fullname = false
             }
-            console.log(error.name)
+        
             
             }
 
@@ -49,7 +47,7 @@ function MyAccount(props){
             error.email = false
                     
             }
-            console.log(error.email)
+     
             }   
         
         const handleChangePassword=(e)=>{
@@ -68,14 +66,9 @@ function MyAccount(props){
             const values = e.target.value
             setPassword1(values)
 
-            if(values != password || !values.trim()){
-                error.password1 = true
+            if(error.password1 && values){
+                error.password1= false
             }
-            else{
-                error.password1 = false
-            }
-
-       
 
         }
 
@@ -84,7 +77,7 @@ function MyAccount(props){
 
         const saveSettings= async()=>{
 
-            if(error.password || error.password1 || error.name || error.email  || !name.trim() || !email.trim() ){
+            if(error.password || error.name || error.email  || !name.trim() || !email.trim() ){
                 return 
             }
             if(password1 != password){
@@ -93,14 +86,11 @@ function MyAccount(props){
 
             await api.put('/edituser1',{id,name,email,password1}).then(
                 res=>{
-                    // if(res.status == 200){
-                        
-                    // }
-                       
+                    
                   
                 },error=>{
                     
-                    console.log(error)
+             
                 }
             )
           
@@ -108,29 +98,6 @@ function MyAccount(props){
             }
 
          
-            // useEffect(()=>{
-
-
-            //     (async(res)=>{
-            
-            //       await api.get('/getusertoedit').then(
-            //         res=>{
-            //            const{id,name,email,admin} = res.data
-            //             setName(name)
-            //             setEmail(email)
-            //             setAdmin(admin)
-            //             setID(id)
-                        
-            //         },error=>{
-            
-            //             console.log(error)
-            //         }
-            //       )
-            
-            //     })()
-                
-            
-            //     },[props.id,props.name,props.email,props.admin])
 
 
     return(
@@ -152,8 +119,7 @@ function MyAccount(props){
             
            
             {error.password1 ? <label  id="inputmatch" for="password1">Senhas Diferentes</label>:<label for="password1">Confirme a Senha</label>}
-            <input className={error.password1 && "form-input invalid"}   name="password1"  onChange={handleChangePassword1} ></input>
-            {/* {error.password1 &&<label  id="inputmatch" for="password1">Senhas Diferentes</label>} */}
+            <input className={error.password1 && "form-input invalid"} type="password"  name="password1"  onChange={handleChangePassword1} ></input>
            
            <div className="editbuttons"> <button type="reset"  onClick={props.HideShadow} id="canceledituser">Cancelar</button> <button  onClick={saveSettings} id="saveedituser">Salvar</button></div>
     

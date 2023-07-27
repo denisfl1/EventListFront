@@ -45,10 +45,7 @@ function Feslist(props){
     
         const id = event.target.id
         setEditId(id)
-        console.log(id)
-
-
-        
+       
 
     }
 
@@ -63,10 +60,10 @@ function Feslist(props){
 
         await api.put("/editlockbutton",{id,checklist}).then(
             res=>{
-                // console.log(res.send)
+            
             },error=>{
                 
-                console.log(error)
+           
             }
         )
 
@@ -78,9 +75,8 @@ function Feslist(props){
     
     const id = event.target.id
     setEditId(id)
-    console.log(id) 
   
-    
+ 
     if(!show){
         setShowModal1(true)
     
@@ -130,9 +126,7 @@ function Feslist(props){
                     // timer:1500  
                  
                   })
-                
-                console.log("Apagado com sucesso")
-                console.log(res.send)
+           
             },error=>{
                
                 Swal.fire({
@@ -151,8 +145,6 @@ function Feslist(props){
                   })
                   
 
-                  console.log(error)
-
             }
             
         )
@@ -166,7 +158,7 @@ function Feslist(props){
 
       
             SOCKET.on('initialList',(list)=>{
-            //  console.log(list)
+       
             setFestList(list)
             if(festlist){
                 setRotating(false)
@@ -209,7 +201,7 @@ function Feslist(props){
     <div id={show1 ? "festcontainer-edit" : "festcontainer"} className={show ? 'festcontainer-open' : 'festcontainer' }  onClick={hide}>
       
       
-        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas disponíveis" :"Festas Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>{setShowModal(true)}}>Adicionar Festa</button></div>
+        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Festas Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>{setShowModal(true)}}>Adicionar Festa</button></div>
         
         {rotating && <div className='loading'>
           <RotatingLines   strokeColor="grey"

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
 
@@ -24,7 +23,7 @@ function AddMonitor(props){
 
           await api.post("/addnameandfill",{id,names,fills}).then
           (res =>{
-              console.log("Salvo com Sucesso")
+              
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -56,7 +55,7 @@ function AddMonitor(props){
                  
               })
             
-              console.log(error.response.status)
+           
            
             })
             

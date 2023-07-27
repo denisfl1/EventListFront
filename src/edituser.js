@@ -46,7 +46,7 @@ function EditUser(props){
         error.email = false
         
     }
-    console.log(error.email)
+
     }
 
 
@@ -73,7 +73,6 @@ function EditUser(props){
             
         },error=>{
 
-            console.log(error)
         }
     )
         window.location.reload()

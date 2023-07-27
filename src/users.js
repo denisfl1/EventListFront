@@ -4,6 +4,8 @@ import { api } from "./api";
 import edit from './logos/edit.png'
 import { AuthContext } from "./authcontroller";
 import EditUser from "./edituser";
+import { RotatingLines } from "react-loader-spinner";
+import searchicon from './logos/lupa.png'
 
  function AllUsers(){
 
@@ -14,7 +16,8 @@ import EditUser from "./edituser";
     const [name,setName] = useState()
     const [email,setEmail] = useState()
     const [password,setPassword] = useState()
-    const[admin,setAdmin] = useState()
+    const [admin,setAdmin] = useState()
+    const [rotating,setRotating] = useState(true)
 
     const [id,setID] = useState()
    
@@ -27,10 +30,12 @@ import EditUser from "./edituser";
         await api.get('/getusers').then(
             res=>{
                 setUsers(res.data)
-           
+                if(res.data){
+                    setRotating(false)
+                }
                
             },error=>{
-                console.log(error)
+              
             }
         )
 
@@ -60,12 +65,9 @@ import EditUser from "./edituser";
 
     await api.delete(`/delUsers/${select}`).then(
         res=>{
-
-            console.log(res.data)
             
-
         },error=>{
-            console.log(error)
+           
         }
     )
    
@@ -113,7 +115,6 @@ import EditUser from "./edituser";
             
         },error=>{
 
-            console.log(error)
         }
       )
 
@@ -132,7 +133,15 @@ import EditUser from "./edituser";
         <div className="participatelist" onClick={hide}>
 
         <div className="addheader"><h1>Usuários</h1></div>
-        <input placeholder="Nome ou Email" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" type="search"></input>
+        <div className="inputsearch"><input placeholder="Nome ou Email" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
+        
+        {rotating ?<div className='loading'>
+          <RotatingLines   strokeColor="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="50"
+          visible={true} />
+            </div>:
         <table className='table '>
 
         <thead>
@@ -171,7 +180,7 @@ import EditUser from "./edituser";
 
         </tbody>
 
-        </table>
+        </table>}
         <EditUser hide1={hide1} id={id} name={name} email={email} password={password} admin={admin} container={container}/>  
         </div>
         

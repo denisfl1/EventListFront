@@ -7,9 +7,6 @@ import { api } from './api';
 
 
 
-
-
-
 function EditList(props){
 
     const {editId} = props
@@ -30,7 +27,7 @@ function EditList(props){
             const res = await api.get("/editId/" + editId)
             const {_id,date,time,extratime} = res.data
             const translatedate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            console.log(_id,date,time,extratime)
+
             setID(_id)
             setDate(translatedate)
             setTime(time)
@@ -40,7 +37,7 @@ function EditList(props){
            
 
         }catch(error){
-            console.log(error)
+            
         }
 
 
@@ -61,20 +58,12 @@ function EditList(props){
 
 
 
-   
-
-    
-
-    // const brDate = moment(date).tz('America/São_Paulo').toDate()
-    // const formattedDate = brDate.toLocaleDateString('pt-BR', {timeZone: 'America/Sao_Paulo'})
 
     const formatteddate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     
 
     const save= async (e)=>{
-        // e.preventDefault()
-        
-        console.log({id,formatteddate,time,extratime})
+  
 
         Swal.fire({
             position: 'center',
@@ -94,11 +83,10 @@ function EditList(props){
 
         await api.put("/editlist",{id,formatteddate,time,extratime}).then(
             res=>{
-                console.log(res.data)
-                
+             
                 props.hidemodal1()
             },error=>{
-                console.log(error)
+        
             }
         )
         

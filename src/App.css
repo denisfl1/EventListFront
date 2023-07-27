@@ -1,5 +1,5 @@
 body {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   background-color: #eeeeee;
@@ -122,7 +122,7 @@ body {
 .festcontainer,.festcontainer-open{
   width: 70%;
   margin: auto;
-  min-height: 80vh;
+  min-height: 100vh;
   padding-bottom: 2rem;
  
 }
@@ -512,7 +512,7 @@ a{
 .participatelist{
   margin: auto;
   max-width: 70%;
-  min-height: 80vh;
+  min-height: 100vh;
 }
 
 .festcontainer,.festcontainer-hide {
@@ -663,7 +663,7 @@ a{
 
 .participatelist{
   margin-top: 10px;
-  min-height: 72vh;
+  min-height: 100vh;
   padding-bottom: 2rem;
  
 }
@@ -685,16 +685,6 @@ a{
 
 }
 
-
-#searchInput{
-  width: 40%;
-  height: 35px;
-  margin-bottom: 14px;
-  /* border-radius: 8px; */
-  text-align: center;
-  font-size: medium;
-  border: 1px solid rgb(43, 145, 133);
-}
 
 #deleteuser:enabled{
   background-color: rgb(178, 68, 79);
@@ -735,7 +725,7 @@ a{
 
 .EditUser{
   background-color: #3a3f3e;
-  height: 440px;
+  height: 425px;
   width: 390px;
   display: flex;
   flex-direction: column;
@@ -801,4 +791,37 @@ a{
 
 #inputmatch{
   color: #b33131;
+}
+
+.inputsearch{
+  width: 400px;
+  background-color: rgb(255, 255, 255);
+  height: 35px;
+  margin-bottom: 5px;
+  align-items: center;
+  display: flex;
+  border: 1px solid rgb(43, 145, 133);
+  
+}
+
+
+.inputsearch img{
+ width: 26px;
+ margin-left: 5px;
+ margin-right: 5px;
+  
+}
+
+#searchInput{
+  width: 100%;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px; 
+  border: none;
+  
+}
+
+
+.inputsearch input:focus-visible {
+ outline: none;
 }

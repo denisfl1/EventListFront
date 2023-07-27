@@ -10,8 +10,6 @@ function Menu(props){
     const {authenticated,logout,person} = useContext(AuthContext)
     const [click,setClick] = useState(false)
     const [Account,setAcccount] = useState(false)
-
-    
     const [name,setName] = useState()
     const [email,setEmail] = useState()
     const [admin,setAdmin] = useState()
@@ -74,11 +72,10 @@ function Menu(props){
                 localStorage.setItem("token",token)
                 localStorage.setItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",admin)
                 setLockedButton(admin)
-                console.log(token)
                 
             },error=>{
     
-                console.log(error)
+    
             }
           )
             

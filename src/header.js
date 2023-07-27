@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from "react";
+import React from "react";
 import Menu from './menu'
 import './App.css'
 import img from './logos/logo.png'

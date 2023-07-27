@@ -1,7 +1,6 @@
 import React,{useContext} from "react";
 import {useState,useEffect} from 'react'
 import img from './logos/logo.png'
-import axios from 'axios'
 import { AuthContext} from "./authcontroller";
 import { api } from "./api";
 import { Navigate } from "react-router-dom";
@@ -24,10 +23,7 @@ import loginvideo from './login video/video.mp4'
    
     })
 
-    const {authenticated,logged} = useContext(AuthContext)
-
-    
-  
+    const {logged} = useContext(AuthContext)
 
 
     const handleChangeName=(event)=>{
@@ -105,14 +101,12 @@ import loginvideo from './login video/video.mp4'
             
             await api.post('/register',{name,email,password}).then(
                 res=>{
-                    // console.log(res.data)
-                    // alert("Cadastrado com Sucesso")
+                  
                     logged(res.data)
                    return <Navigate to="/login"/>
-                },error=>{
-                    console.log(error)
+                },error=>{  
                     setemailCheck({login:true})
-                    console.log("Email já existe")
+
                 }
             )
                           

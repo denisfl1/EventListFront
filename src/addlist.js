@@ -1,12 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import './App.css';
 import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from './api';
-import { AuthContext } from './authcontroller';
-
-
 
 
 
@@ -19,10 +16,7 @@ function List(props){
     const [extrachange,setExtraChange] = useState(" - ")
     const [extratime,setExtraTime] = useState()
 
-   
-    const {lockedButton} = useContext(AuthContext)
-    
-    
+
 
     const CheckOption = (e)=>{
      
@@ -43,11 +37,9 @@ function List(props){
             
 
         if(!time.trim()  || !date.trim()){
-            console.log('Campos inválidos')
       
             Swal.fire({
 
-             
 
                 position: 'center',
                 icon: 'error',
@@ -69,11 +61,7 @@ function List(props){
          
         await api.post("/newevent",{formattedDate,time,extratime}).then
         (res=>{
-            console.log(res.status)
-            // setDate(" ")
-            // setTime(" ")
-            // setExtraChange()
-            // setExtraTime( ) 
+
             
         Swal.fire({
         position: 'center',
@@ -92,7 +80,7 @@ function List(props){
     
             
         },error=>{
-            console.log(error)
+         
         })
 
     }   

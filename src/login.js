@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import {useState} from 'react'
 import img from './logos/logo.png'
 import {Link, Navigate} from 'react-router-dom'
-import axios from 'axios'
 import { AuthContext } from "./authcontroller";
 import { api } from "./api";
 import loginvideo from './login video/video.mp4'
@@ -24,7 +23,7 @@ import loginvideo from './login video/video.mp4'
 
   
     
-    const {authenticated,logged} = useContext(AuthContext)
+    const {logged} = useContext(AuthContext)
 
 
         const handleChangeEmail=(event)=>{
@@ -70,7 +69,6 @@ import loginvideo from './login video/video.mp4'
                     logged(res.data)
                     
                 },error=>{
-                    console.log(error)
                     emailCheck.login = true
                     setError({email:true,password:true})
 
@@ -92,12 +90,10 @@ import loginvideo from './login video/video.mp4'
             <form className="login-form">
            
             <input className={error.email ? 'form-input invalid1' : 'form-input ' }name={"email"} onChange={handleChangeEmail} type="text"  placeholder="Digite seu Email" ></input>    
-            {/* <label className="labelerror">{error.email ? "Email Inválido" : " "} </label> */}
-          
-
+           
 
             <input className={error.password ? 'form-input invalid2' : 'form-input '} name={"password"} onChange={handleChangePassword}  type="password" placeholder="Digite sua Senha" ></input>
-            {/* <label className="labelerror">{error.password ? "Senha Inválida":" "} </label> */}
+
             <label className="labelerror">{emailCheck.empty ? "Campos Obrigatórios *" : " "}
             {emailCheck.login ? "Email ou Senha Incorretos *" : " "}
             </label>
