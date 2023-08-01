@@ -63,30 +63,31 @@ function EditList(props){
     
 
     const save= async (e)=>{
-  
-
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Alterado com Sucesso!',
-            confirmButtonColor:'#3085d6',
-            width:"350px",
-            customClass:'swal-wide',
-            confirmButtonText:"Fechar",
-            // showConfirmButton:false,
-            // timer:1500
-            
-           
-         
-          })
 
 
         await api.put("/editlist",{id,formatteddate,time,extratime}).then(
             res=>{
-             
+                if(res.status == 200){
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Alterado com Sucesso!',
+                        confirmButtonColor:'#3085d6',
+                        width:"350px",
+                        customClass:'swal-wide',
+                        confirmButtonText:"Fechar",
+                        // showConfirmButton:false,
+                        // timer:1500
+                        
+                       
+                     
+                      })
+
+                }
                 props.hidemodal1()
             },error=>{
-        
+                props.hidemodal1()
             }
         )
         
@@ -128,7 +129,7 @@ function EditList(props){
         <input name={"time"} disabled ={extrachange == " - " || extrachange == "Não"  } type='time' onChange={(event) => setExtraTime(event.target.value)} defaultValue={extratime}></input>
       
     
-        <div className='editbuttons'><button type="reset" id="cancel"  onClick={props.hidemodal1}>Cancelar</button><button type="reset" id='save' onClick={save}>Salvar</button></div>
+        <div className='editbuttons'><button type="reset" id="cancel"  onClick={props.hidemodal1}>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
         
         </form>
 

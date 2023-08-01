@@ -5,6 +5,10 @@ body {
   background-color: #eeeeee;
 }
 
+.Appcontainer{
+  min-height: 100vh;
+}
+
 .header{
   display: flex;
   align-items: center;
@@ -136,7 +140,6 @@ body {
   width: 100%;
  
 
-  /* margin-left: 50px; */
 }
 
 .addheader button{
@@ -148,6 +151,9 @@ body {
   color: #ffffff;
   font-size:medium;
   cursor: pointer;
+  font-weight: bolder;
+  font-family: 'Poppins',sans-serif;
+  
 }
 
 .addheader button:hover{
@@ -183,7 +189,7 @@ body {
 .table{
   text-align: center;
   width: 100%;
-
+  
   /* max-width: 100%; */
   padding-bottom: 1rem;
   /* background-color: transparent; */
@@ -280,6 +286,11 @@ body {
   z-index: -1;
 }
 
+#login-register{
+ padding: 65px;
+ margin-top: 60px;
+}
+
 .login{
   margin: auto;
   margin-top: 100px;
@@ -290,7 +301,6 @@ body {
   border-radius:10px;
   position: relative;
   
-  
 }
 
 .login button{
@@ -300,6 +310,12 @@ body {
   font-family:'Poppins';
 }
 
+.login button:disabled{
+  background-color: grey;
+  color: rgb(255, 255, 255);
+  font-weight:bolder;
+  font-family:'Poppins';
+}
 
 .login input{
   background-color: #5d3f6c;
@@ -365,14 +381,7 @@ body {
   
   border: 3px solid #e63636
 }
-.form-input.invalid1 {
-  
-  border: 3px solid #e63636
-}
-.form-input.invalid2 {
-  
-  border: 3px solid #e63636
-}
+
 
 
 a{
@@ -385,6 +394,7 @@ a{
 
 .swal-wide h2{
   font-size: 21px;
+  margin-bottom: 5px;
 }
 
 .festcontainer-open .listform {
@@ -436,7 +446,6 @@ a{
   border: none;
   box-shadow: 1px 1px 6px #0000005e;
   
-  
 }
 .listform select,
 .editlistform select{
@@ -457,7 +466,7 @@ a{
 
 .listform button,
 .editlistform button{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins',sans-serif;
   background-color:  #3085d6;
   color: white;
   border: none;
@@ -466,6 +475,7 @@ a{
   padding: 10px;
   cursor: pointer;
   font-size:14px;
+  font-weight: bold;
 }
 
 .listform button:hover{
@@ -475,22 +485,9 @@ a{
 }
 
 
-
-
-
-
-
-.editbuttons button{
- 
-  width: 100px;
-  margin-left: 8px;
-}
-
-
-
-
 #save{
   background-color: #0e78d4;
+  width: 115px;
 }
 #save:hover{
   background-color: #075293;
@@ -499,6 +496,8 @@ a{
 
 #cancel{
   background-color: #c21313;
+  margin-right: 15px;
+  width: 110px;
 }
 
 
@@ -631,8 +630,8 @@ a{
 .shadowcontainer,
 .shadowcontaineredit{
   margin: auto;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   background-color: rgba(0,0,0,0.2);
   position:fixed;
   top:0;
@@ -649,7 +648,7 @@ a{
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 80px;
+  height: 86px;
   background-color: #3e3e3e;
   color: white;
   
@@ -658,7 +657,7 @@ a{
 .footer li{
   list-style: none;
   margin-left: 100px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .participatelist{
@@ -669,11 +668,11 @@ a{
 }
 
 .logincontainer{
-  height: 85vh;
+  min-height: 88vh;
 }
 
 .loading{
-  height: 80vh;
+  min-height: 100vh;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -726,7 +725,7 @@ a{
 .EditUser{
   background-color: #3a3f3e;
   height: 425px;
-  width: 390px;
+  width: 380px;
   display: flex;
   flex-direction: column;
   align-items:center;
@@ -737,6 +736,7 @@ a{
   font-size: large;
   position: relative;
   text-align: center;
+  box-shadow:  0px 0px 10px 6px #0000007d;
 
 }
 
@@ -747,8 +747,13 @@ a{
   height: 40px;
   margin-top:4px;
   border: none;
-  font-size: medium;
+  font-size: large;
   text-align: center;
+  background-color:  #5d3f6c;
+  color: white;
+  /* font-weight: bold; */
+  border-radius: 5px;
+  font-family: 'Poppins',sans-serif;  
 }
 
 
@@ -766,6 +771,8 @@ a{
   margin-bottom: 20px;
   border:none;
   font-size: 15px;
+  background-color:  #5d3f6c;
+  color: white;
 }
 
 .EditUser button{
@@ -777,11 +784,13 @@ a{
   color: white;
   border: none;
   font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins',sans-serif;
+  font-weight: bold;
+  background-color: rgb(43, 145, 133);
 }
 
 #canceledituser{
-  background-color: rgb(163, 8, 8);
+  background-color:#b33131;
 }
 
 
@@ -824,4 +833,66 @@ a{
 
 .inputsearch input:focus-visible {
  outline: none;
+}
+
+.tokengencontainer-hide{
+  display: none;
+}
+
+.tokengencontainer{
+  color: white;
+  background-color: #3a3f3e;
+  width: 300px;
+  height: 180px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  margin: auto;
+  font-family: 'Poppins',sans-serif;
+  border-radius: 5px  ;
+  box-shadow:  0px 0px 10px 6px #0000007d;
+  text-align: center;
+
+}
+
+.tokengencontainer input{
+  width: 70%;
+  height: 35px;
+  text-align: center;
+  font-size: 25px;
+  background-color:  #5d3f6c;
+  color: white;
+  border: none;
+}
+
+.tokengencontainer input:focus-visible {
+  outline: none;
+ }
+
+
+.tokengencontainer button{
+  
+  height: 35px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: rgb(43, 145, 133);
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Poppins',sans-serif;
+  display: inline;
+  cursor: pointer;
+  
+}
+
+#canceltoken{
+  background-color:#b33131;
+  width: 100px;
+}
+
+#genbutton{
+  width: 100px;
+  margin-left: 8px;
 }

@@ -119,7 +119,7 @@ function List(props){
         <input name={"time"} disabled ={extrachange == " - " } type='time' onChange={(event) => setExtraTime(event.target.value)} defaultValue={extratime} ></input>
       
     
-        <div className='editbuttons'><button  id="cancel"  onClick={props.hidemodal} >Cancelar</button><button   onClick={enviar}>Adicionar</button></div>
+        <div className='editbuttons'><button  id="cancel"  onClick={props.hidemodal} >CANCELAR</button><button  id="save" onClick={enviar}>ADICIONAR</button></div>
         </div> 
 
         </div>

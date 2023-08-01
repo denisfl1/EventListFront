@@ -5,21 +5,25 @@ import { AuthContext} from "./authcontroller";
 import { api } from "./api";
 import { Navigate } from "react-router-dom";
 import loginvideo from './login video/video.mp4'
+import InputMask from "react-input-mask";
 
 
     function Register(){
 
 
     const [name,setName] = useState(" ")
-    const [email,setEmail] = useState(" ")
+    const [number,setNumber] = useState(" ")
     const [password,setPassword] = useState(" ")
-    const [emailCheck,setemailCheck] = useState({login:false,empty:false})
+    const [authtoken,setAuthtoken] = useState(" ")
+    const [numberCheck,setNumberCheck] = useState({login:false,empty:false})
+    const [loginlock,setLoginLock] = useState(false)
 
 
-    const [error,setError] = useState({
+    const [ERROR,setError] = useState({
     fullname:false,
-    email:false,
+    number:false,
     password:false,
+    token:false
    
     })
 
@@ -34,35 +38,34 @@ import loginvideo from './login video/video.mp4'
     setName(values)
         
     if(!filter[1] ){
-        error.fullname = true
+        ERROR.fullname = true
    
     }else{
-        error.fullname = false
+        ERROR.fullname = false
    }
     
     if(values){
-        emailCheck.empty = false
+        numberCheck.empty = false
     }
 
 
  
     }
 
-    const handleChangeEmail=(event)=>{
-      const regex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/
+    const handleChangeNumber=(event)=>{
+      const regex =  /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
       const values = event.target.value
-      setEmail(values)
+      setNumber(values)
 
-    if(!regex.test(values) || values == " "){   
-        error.email = true
-           
-    }else{
-        error.email = false
-            
-            
-    }if(values){
-       setemailCheck({login:false,empty:false})
-    }
+      if(!regex.test(values) || values == " "){
+       ERROR.number = true
+        return
+      }ERROR.number = false
+       
+      if(values){
+        setNumberCheck({login:false,empty:false})
+      }
+
   
     }
 
@@ -73,39 +76,60 @@ import loginvideo from './login video/video.mp4'
         
 
     if(values.length <5  || !values){
-        error.password = true
-        emailCheck.empty = false
+        ERROR.password = true
+        numberCheck.empty = false
 
             
     }else{
-        error.password=false
+        ERROR.password=false
     }
 
 
     }
 
+    const handleChangeToken=(event)=>{
 
+        const values = event.target.value
+        setAuthtoken(values)
+        
+        if(values){
+         ERROR.token = false 
+        numberCheck.empty = false
+        }
+    }
 
 
     const handleSubmit = async  (event)=> {
         event.preventDefault()
-        
-        if(error.fullname || error.email || error.password || emailCheck.empty) {
-         return   event.preventDefault()
+
+        if(ERROR.fullname || ERROR.number || ERROR.password || numberCheck.empty || ERROR.token) {
+         return   
         }
-        if(!name.trim() || !email.trim() || !password.trim()){
-         setemailCheck({empty:true})
+        if(!name.trim() || !number.trim() || !password.trim() || !authtoken.trim()){
+         setNumberCheck({empty:true})
 
         }else{
            
             
-            await api.post('/register',{name,email,password}).then(
+            await api.post('/register',{name,number,password,authtoken}).then(
                 res=>{
-                  
-                    logged(res.data)
-                   return <Navigate to="/login"/>
-                },error=>{  
-                    setemailCheck({login:true})
+                    if(res.status == 200){
+                        setLoginLock(true)
+                        logged(res.data)
+                        return <Navigate to="/login"/>
+                    }        
+                },error=>{ 
+                    
+                    switch(error.response.data){
+                        case "Token Inválido":
+                        setError({token:true})
+                    break;
+                        case "Número já existe":
+                        setNumberCheck({login:true})
+                        break
+                    }
+
+
 
                 }
             )
@@ -122,38 +146,39 @@ import loginvideo from './login video/video.mp4'
     return(
         <div className="logincontainer">
            <video className="elementor-video"  src={loginvideo} autoPlay loop muted playsInline controlsList="nodownload" ></video>
-        <div className="login" >
+        <div id="login-register" className="login" >
             
             <img className="spasso-picture" src={img} ></img>
             <form className="login-form"  >
             
             
-            <input className={error.fullname || emailCheck.empty ? 'form-input invalid' : 'form-input' } 
+            <input className={ERROR.fullname || numberCheck.empty ? 'form-input invalid' : 'form-input' } 
             name={"name"} onChange={handleChangeName}
             placeholder="Nome e Sobrenome" ></input>
-            <label className="labelerror">{emailCheck.empty ? "" : error.fullname ? "Nome Inválido *":" " }  
+            <label className="labelerror">{numberCheck.empty ? "" : ERROR.fullname ? "Nome Inválido *":" " }  
             </label>
-            
-           
-            <input className={error.email|| emailCheck.login || emailCheck.empty ? 'form-input invalid1' : 'form-input '} 
-            name={"email"} onChange={handleChangeEmail} 
-            placeholder="Digite seu E-mail" ></input>
-             <label className="labelerror">{emailCheck.login || emailCheck.empty ? "" :error.email ? "E-mail Inválido *" : "  "} 
-             {emailCheck.login ? "E-mail Já Cadastrado *" : "  "  } 
-             </label>
              
-               
+            
+             <InputMask className={ERROR.number|| numberCheck.login || numberCheck.empty ? 'form-input invalid' : 'form-input '} mask="(99) 99999-9999" id="telefone" name="telefone" placeholder="Número de Celular" onChange={handleChangeNumber}/>
+             <label className="labelerror">{numberCheck.login || numberCheck.empty ? "" :ERROR.number ? "Número Inválido *" : "  "} 
+             {numberCheck.login ? "Número Já Cadastrado *" : "  "  } 
+             </label>
             
             
-            <input className={error.password|| emailCheck.empty ? 'form-input invalid2' : 'form-input'} 
+            <input className={ERROR.password|| numberCheck.empty ? 'form-input invalid' : 'form-input'} 
             name={"password"} onChange={handleChangePassword}  type="password"
              placeholder="Digite sua Senha" ></input>
-              <label className="labelerror">{emailCheck.empty ? "" : error.password ? "Mínimo 5 Caracteres *":" "}
-              {emailCheck.empty ?"Campos Obrigatórios *" : " "} 
+              <label className="labelerror">{numberCheck.empty ? "" : ERROR.password ? "Mínimo 5 Caracteres *":" "}
               </label>
+
+              
+             
+              <input  className={ERROR.token || numberCheck.empty ? 'form-input invalid' :'form-input'} name={"token"} onChange={handleChangeToken} placeholder="Token de Autenticação"></input>
+              <label  className="labelerror">{ERROR.token ? "Token Inválido *":" "} {numberCheck.empty ?"Campos Obrigatórios *" : " "} </label>
+              
+
             
-            
-            <button type="submit" onClick={handleSubmit}>Cadastrar</button>
+            <button disabled={loginlock} type="submit" onClick={handleSubmit}>Cadastrar</button>
             </form>
            
            

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { api } from "./api";
+import InputMask from "react-input-mask";
+import Swal from "sweetalert2";
 
 
 function MyAccount(props){
 
     const [name,setName] = useState(props.name)
-    const [email,setEmail] = useState(props.email)
+    const [number,setNumber] = useState(props.number)
     const [password,setPassword] = useState()
     const [password1,setPassword1] = useState()
     const [admin,setAdmin] = useState(props.admin)
@@ -13,10 +15,10 @@ function MyAccount(props){
 
         const [error,setError] = useState({
             fullname:false,
-            email:false,
+            number:false,
             password:false,
             password1:false,
-            match:false
+            matchnumber:false
         
             })
     
@@ -35,16 +37,16 @@ function MyAccount(props){
             
             }
 
-        const handleChangeEmail=(e)=>{
+        const handleChangeNumber=(e)=>{
             const values = e.target.value
-            const regex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/  
-            setEmail(values)
+            const regex =  /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/ 
+            setNumber(values)
             
             if(!regex.test(values)){
-            error.email = true
+            error.number = true
             
             }else{
-            error.email = false
+            error.number = false
                     
             }
      
@@ -77,24 +79,52 @@ function MyAccount(props){
 
         const saveSettings= async()=>{
 
-            if(error.password || error.name || error.email  || !name.trim() || !email.trim() ){
-                return 
-            }
             if(password1 != password){
                 return error.password1 = true
             }
 
-            await api.put('/edituser1',{id,name,email,password1}).then(
+            if(error.password || error.name || error.number  || !name.trim() || !number.trim() ){
+                return 
+            }
+           
+
+            await api.put('/edituser1',{id,name,number,password1}).then(
                 res=>{
-                    
+                    if(res.status == 200){
+                  return window.location.reload()
+                }
                   
                 },error=>{
-                    
+                   props.CloseMyAccount()
+                    switch(error.response.data){
+                        case "Número já existe":
+                           
+                        setError({matchnumber:true})
+                        Swal.fire({
+
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Número já Existe!',
+                            // confirmButtonColor:'#3085d6',
+                            // confirmButtonText:"Fechar",
+                            width:"350px",
+                            // buttonsStyling:false,
+                            showConfirmButton:false,
+                            heightAuto:false,
+                            height:'360px',
+                            customClass:'swal-wide',
+                            timer:1500
+                        
+                             
+                          })
+                         
+                      break  
+                    }
              
                 }
             )
-          
-            window.location.reload()
+            
+           
             }
 
          
@@ -110,9 +140,9 @@ function MyAccount(props){
             {error.fullname ?<label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
             <input className={error.fullname && "form-input invalid"} disabled={!admin} name="name" defaultValue={name} onChange={handleChangeName}></input>
             
-    
-            {error.email ? <label id="inputmatch" for="email">Email Inválido</label>:<label for="email">Email Atual</label>}
-            <input className={error.email && "form-input invalid"} disabled={!admin} name="email" defaultValue={email} onChange={handleChangeEmail}></input>
+
+            {error.number ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
+            <InputMask className={error.number && 'form-input invalid'} disabled={!admin} mask="(99) 99999-9999"  name="number" defaultValue={number}  onChange={handleChangeNumber}/>
     
             {error.password ?<label id="inputmatch" for="password">Mínimo 5 caracteres</label> :<label for="password">Nova Senha</label>}
             <input className={error.password && "form-input invalid"}  type="password"  name="password" onChange={handleChangePassword}></input>
@@ -121,7 +151,7 @@ function MyAccount(props){
             {error.password1 ? <label  id="inputmatch" for="password1">Senhas Diferentes</label>:<label for="password1">Confirme a Senha</label>}
             <input className={error.password1 && "form-input invalid"} type="password"  name="password1"  onChange={handleChangePassword1} ></input>
            
-           <div className="editbuttons"> <button type="reset"  onClick={props.HideShadow} id="canceledituser">Cancelar</button> <button  onClick={saveSettings} id="saveedituser">Salvar</button></div>
+           <div className="editbuttons"> <button type="reset"  onClick={props.HideShadow} id="canceledituser">CANCELAR</button> <button  onClick={saveSettings} id="saveedituser">SALVAR</button></div>
     
     
         </div>

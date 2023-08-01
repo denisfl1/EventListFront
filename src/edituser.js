@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "./api";
+import InputMask from "react-input-mask";
+import Swal from "sweetalert2";
 
 
 function EditUser(props){
@@ -8,14 +10,16 @@ function EditUser(props){
 
     const [ocultOption,setOcultOption] = useState(false)
     const [name,setName] = useState()
-    const [email,setEmail] = useState()
+    const [number,setNumber] = useState()
     const [admin,setAdmin] = useState()
     const id = props.id
-    
+   
+  
 
     const [error,setError] = useState({
         fullname:false,
-        email:false,
+        number:false,
+        matchnumber:false
        
         })
 
@@ -34,48 +38,66 @@ function EditUser(props){
     
     }
 
-    const handleChangeEmail=(e)=>{
+    const handleChangeNumber=(e)=>{
     const values = e.target.value
-    const regex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/  
-    setEmail(values)
+    const regex =  /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
+    setNumber(values)
 
     if(!regex.test(values)){
-        error.email = true
+        error.number = true
 
     }else{
-        error.email = false
+        error.number = false
         
     }
 
     }
 
-
+    
     
     useEffect(()=>{
-        
+   
   
     setName(props.name)
-    setEmail(props.email)
+    setNumber( props.number)
     setAdmin(props.admin)
 
-      
-    },[props.name,props.email,props.admin])
+    },[props.name,props.admin,props.number])
     
-    const saveSettings= async()=>{
-   
+    const saveSettings= async(e)=>{
+        e.preventDefault()
     
-    if(error.email || error.fullname || !name.trim() || !email.trim()){
+    if(error.number || error.fullname || !name.trim() || !number.trim()){
     return
     }
     
-    await api.put('/edituser',{id,name,email,admin}).then(
+    await api.put('/edituser',{id,name,number,admin}).then(
         res=>{
-            
+            window.location.reload()
         },error=>{
+            props.hide1()
+            if(error.response.status == 404){
+                Swal.fire({
 
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Número já Existe!',
+                    // confirmButtonColor:'#3085d6',
+                    // confirmButtonText:"Fechar",
+                    width:"350px",
+                    // buttonsStyling:false,
+                    showConfirmButton:false,
+                    heightAuto:false,
+                    height:'360px',
+                    customClass:'swal-wide',
+                    timer:1500
+                
+                     
+                  })
+            }
         }
     )
-        window.location.reload()
+
 
     }
 
@@ -91,7 +113,7 @@ function EditUser(props){
 
     const close=()=>{
     setError(
-        {fullname:false,email:false}
+        {fullname:false,number:false}
     )
 
     props.hide1()
@@ -102,16 +124,15 @@ function EditUser(props){
 
     <div className={!props.container ? "shadowcontainer-hide" : "shadowcontainer"}>
 
-    <div className={props.container ? "EditUser" : "EditUser-hide"}>
+    <form className={props.container ? "EditUser" : "EditUser-hide"}>
         <h3>ALTERAR DADOS</h3>
 
         {error.fullname ? <label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
         <input className={error.fullname && "form-input invalid" } disabled={!props.name} name="name" defaultValue={name} value={name} onChange={handleChangeName}></input>
         
 
-        {error.email ? <label id="inputmatch" for="email">Email Inválido</label>:<label for="email">Email Atual</label>}
-        <input className={error.email && "form-input invalid"} disabled={!props.email} name="email" defaultValue={email} value={email} onChange={handleChangeEmail}></input>
-
+        {error.number ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
+        <InputMask className={error.number &&'form-input invalid'}  mask="(99) 99999-9999" id="telefone" name="number"  defaultValue={number}  value={number} onChange={handleChangeNumber}/>
        
         
         <label for="admin">Administrador </label>
@@ -126,7 +147,7 @@ function EditUser(props){
        <div className="editbuttons"> <button type="reset" onClick={close} id="canceledituser">Cancelar</button> <button  onClick={saveSettings} id="saveedituser">Salvar</button></div>
 
 
-    </div>
+    </form>
 
     </div>
 )

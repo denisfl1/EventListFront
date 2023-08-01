@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import edit from './logos/edit.png'
 import del from './logos/delete.png'
 import { useParams } from "react-router-dom";
@@ -11,24 +11,21 @@ import { RotatingLines } from "react-loader-spinner";
 
 
 
-
-
-
 function Participate(props){
 
     const {id} = useParams()
-    const [date,setDate] = useState( )
-    const [time,setTime] = useState( )
-    const [extratime,setExtraTime] = useState( )
+    const [alldata,setallData] = useState()
+    const [date,setDate] = useState()
+    const [time,setTime] = useState()
+    const [extratime,setExtraTime] = useState()
+    const [btn,setBtn] = useState()
     const [monitorcontainer,setMonitorcontainer] = useState()
     const [monitoreditcontainer,setMonitoreditcontainer] = useState()
     const [position,setPosition] = useState()
-    const [alldata,setallData] = useState()
-    const [btn,setBtn] = useState()
     const [userid,setuserid]= useState()
     const [username,setusername] = useState()
     const [useradmin,setuseradmin] = useState()
-    const[rotating,setRotating] = useState(true)
+    const [rotating,setRotating] = useState(true)
 
 
     const {lockedButton} = useContext(AuthContext)
@@ -127,9 +124,7 @@ function Participate(props){
    
     useEffect(()=>{
         
-             
-   
-      
+               
         SOCKET.on('participate',(list)=>{
       
             setallData([list])
@@ -137,19 +132,18 @@ function Participate(props){
             setTime(list.time)
             setExtraTime(list.extratime)
             setBtn(list.lockbtn)
-         
+            
             if([list]){
                 setRotating(false)
             }
 
-
-           
+                
            })
            
            SOCKET.on('participateerror',(error)=>{
            
             return SOCKET.disconnect()
- 
+            
            })
            
            SOCKET.emit('participatelist',id)
@@ -158,10 +152,9 @@ function Participate(props){
 
            return () => {
             SOCKET.removeAllListeners("participate");
-            };
+            }
 
       
-
 
     },[alldata])
 
@@ -187,9 +180,7 @@ function Participate(props){
     
         })();
         
-
-
-    
+  
        },[useradmin,username])
 
 
@@ -207,6 +198,7 @@ function Participate(props){
           width="50"
           visible={true} />
             </div>:
+
     <table className='table '>
                 
             

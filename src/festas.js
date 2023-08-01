@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react';
 import './App.css';
@@ -24,9 +24,8 @@ function Feslist(props){
     const [show1,setShowModal1] = useState()
     const [festlist,setFestList] = useState()
     const [editId,setEditId] = useState()
-    const [lock,setLock] = useState()
-    const[rotating,setRotating] = useState(true)
-    
+    const [rotating,setRotating] = useState(true)
+   
 
     const {lockedButton} = useContext(AuthContext)
   
@@ -52,10 +51,9 @@ function Feslist(props){
    
     const handlecheck= async (event)=>{
 
-        const checklist = event.target.checked // o valor está vindo o oposto do que está vindo da api, o porque não sei
-        const btn = event.target.defaultValue
+        const checklist = event.target.checked // O valor está vindo o oposto da API ex:!true, !false
         const id = event.target.id
-        setLock(btn)
+       
        
 
         await api.put("/editlockbutton",{id,checklist}).then(
@@ -151,25 +149,25 @@ function Feslist(props){
 
     }
 
-   
-    
   
     useEffect(()=>{
 
       
             SOCKET.on('initialList',(list)=>{
-       
+            
             setFestList(list)
-            if(festlist){
-                setRotating(false)
-            }  
+                
+                if(festlist){
+                    setRotating(false)
+                }  
+           
             
             })
     
      
             
             SOCKET.on('initialListError',(error)=>{
-
+                
             return SOCKET.disconnect()
 
             })
@@ -182,9 +180,7 @@ function Feslist(props){
             SOCKET.removeAllListeners("initialList");
             };
         
-
-
-            
+          
 
     },[festlist])
 
@@ -272,7 +268,7 @@ function Feslist(props){
             
 
             <Addlist  show={show} hidemodal={hidemodal} />
-            <EditList editId={editId} show1={show1} hidemodal1={hidemodal1} default  />
+            <EditList editId={editId} show1={show1} hidemodal1={hidemodal1} />
             
       
         

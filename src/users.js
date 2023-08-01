@@ -14,10 +14,10 @@ import searchicon from './logos/lupa.png'
     const [searchUser,setSearchUser]=  useState()
     const [container,setContainer] = useState(false)
     const [name,setName] = useState()
-    const [email,setEmail] = useState()
+    const [number,setNumber] = useState()
     const [password,setPassword] = useState()
     const [admin,setAdmin] = useState()
-    const [rotating,setRotating] = useState(true)
+    const [rotating,setRotating] = useState(true) 
 
     const [id,setID] = useState()
    
@@ -30,7 +30,7 @@ import searchicon from './logos/lupa.png'
         await api.get('/getusers').then(
             res=>{
                 setUsers(res.data)
-                console.log(users)
+                
                 if(res.data){
                     setRotating(false)
                 }
@@ -108,12 +108,11 @@ import searchicon from './logos/lupa.png'
 
       await api.get(`/getusertoedit/${id}`).then(
         res=>{
-           const{id,name,email,admin} = res.data
+           const{id,name,number,admin} = res.data
             setName(name)
-            setEmail(email)
+            setNumber(number)
             setAdmin(admin)
             setID(id)
-            
         },error=>{
 
         }
@@ -125,7 +124,7 @@ import searchicon from './logos/lupa.png'
     },[id])
    
     const filteredUsers = typeof searchUser !== "undefined" ?
-    users.filter((item)=>item.name.toLowerCase().includes(searchUser) ||item.email.toLowerCase().includes(searchUser)):
+    users.filter((item)=>item.name.toLowerCase().includes(searchUser) ||item.name.includes(searchUser) ||item.number.includes(searchUser)):
     users
 
     
@@ -134,7 +133,7 @@ import searchicon from './logos/lupa.png'
         <div className="participatelist" onClick={hide}>
 
         <div className="addheader"><h1>Usuários</h1></div>
-        <div className="inputsearch"><input placeholder="Nome ou Email" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
+        <div className="inputsearch"><input placeholder="Nome ou Número" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
         
         {rotating ?<div className='loading'>
           <RotatingLines   strokeColor="grey"
@@ -153,7 +152,7 @@ import searchicon from './logos/lupa.png'
 
             <th>Nome</th>
 
-            <th>Email</th>
+            <th>Número</th>
 
             <th>Admin</th>
 
@@ -172,7 +171,7 @@ import searchicon from './logos/lupa.png'
         <tr key={index} id={value._id == ID && "MyUser"}>
         <td>{index + 1}</td>
         <td>{value.name}</td>
-        <td>{value.email}</td>
+        <td>{value.number}</td>
         <td><input className="activatelist" checked={value.admin} type="checkbox"></input></td>
         <td><img onClick={OpenEdit} id={value._id} className="edit" src={edit}></img></td>
         <td><input onClick={GetUsers} className="usercheck" type="checkbox" defaultValue={value._id}></input></td>
@@ -182,7 +181,7 @@ import searchicon from './logos/lupa.png'
         </tbody>
 
         </table>}
-        <EditUser hide1={hide1} id={id} name={name} email={email} password={password} admin={admin} container={container}/>  
+        <EditUser hide1={hide1} id={id} name={name} number={number} password={password} admin={admin} container={container}/>  
         </div>
         
     )

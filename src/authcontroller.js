@@ -12,22 +12,14 @@ export const AuthProvider = ({children})=>{
     const navigate = useNavigate()
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
-    // const [person,setPerson] = useState()
     const [lockedButton,setLockedButton] = useState()
-
 
     const recoveredUser = localStorage.getItem("userdata");
         const token = localStorage.getItem("token")
-        // const USER = localStorage.getItem("user")
         const ID = localStorage.getItem("myid")
-        const admin = JSON.parse(localStorage.getItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"))
 
     
     useEffect(()=>{
-    
-
-        // setPerson(USER)
-        // setLockedButton(admin)
         
 
         setTimeout(()=>{
@@ -45,10 +37,7 @@ export const AuthProvider = ({children})=>{
               return  SOCKET.disconnect()
                 
             }
-
-
-            
-            
+     
            
         },1)
            
@@ -62,8 +51,7 @@ export const AuthProvider = ({children})=>{
 
         const loggedUser = data
         const token = loggedUser.token
- 
-        // setPerson(loggedUser.name)
+        
         setLockedButton(loggedUser.admin)
 
         localStorage.setItem("userdata",JSON.stringify(loggedUser))
@@ -81,7 +69,7 @@ export const AuthProvider = ({children})=>{
             setUser(loggedUser)
             navigate("/festas")
             
-            SOCKET.connect("http://localhost:3000",{maxBufferSize:50,extraHeaders:{Authorization:token}})
+            SOCKET.connect(process.env.REACT_APP_URL,{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
        
 
@@ -94,13 +82,25 @@ export const AuthProvider = ({children})=>{
         localStorage.removeItem("myid")
         localStorage.removeItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
         api.defaults.headers.Authorization = null
+        SOCKET.io.opts.extraHeaders = { Authorization: null }
         setUser(null)
     //    return SOCKET.disconnect()
 
 
   }
 
-   
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response.status == 401) {  
+        logout();
+          
+            
+      }
+      return Promise.reject(error);
+    }
+  );
 
 
 return(
