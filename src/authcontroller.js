@@ -13,6 +13,7 @@ export const AuthProvider = ({children})=>{
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
     const [lockedButton,setLockedButton] = useState()
+  
 
     const recoveredUser = localStorage.getItem("userdata");
         const token = localStorage.getItem("token")
@@ -51,7 +52,7 @@ export const AuthProvider = ({children})=>{
 
         const loggedUser = data
         const token = loggedUser.token
-        
+ 
         setLockedButton(loggedUser.admin)
 
         localStorage.setItem("userdata",JSON.stringify(loggedUser))
@@ -69,14 +70,14 @@ export const AuthProvider = ({children})=>{
             setUser(loggedUser)
             navigate("/festas")
             
-            SOCKET.connect(process.env.REACT_APP_URL,{maxBufferSize:50,extraHeaders:{Authorization:token}})
+            SOCKET.connect("http://localhost:3000",{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
        
 
     }
 
     const logout = ()=>{
-
+        setLoading(true)
         localStorage.removeItem("userdata")
         localStorage.removeItem("token")
         localStorage.removeItem("myid")
@@ -93,9 +94,8 @@ export const AuthProvider = ({children})=>{
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response.status == 401) {  
-        logout();
-          
+      if (error.response.status == 401) {   
+      logout();         
             
       }
       return Promise.reject(error);
