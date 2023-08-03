@@ -27,7 +27,7 @@ function TokenGen(props){
              
               })
             }else{
-           props.OpenToken()
+            props.OpenToken()
         }
         },error=>{
             

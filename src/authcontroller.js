@@ -70,7 +70,7 @@ export const AuthProvider = ({children})=>{
             setUser(loggedUser)
             navigate("/festas")
             
-            SOCKET.connect("http://localhost:3000",{maxBufferSize:50,extraHeaders:{Authorization:token}})
+            SOCKET.connect(process.env.REACT_APP_URL,{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
        
 
@@ -89,18 +89,6 @@ export const AuthProvider = ({children})=>{
 
 
   }
-
-
-  api.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (error.response.status == 401) {   
-      logout();         
-            
-      }
-      return Promise.reject(error);
-    }
-  );
 
 
 return(

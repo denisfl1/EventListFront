@@ -17,7 +17,7 @@ import searchicon from './logos/lupa.png'
     const [number,setNumber] = useState()
     const [password,setPassword] = useState()
     const [admin,setAdmin] = useState()
-    const [rotating,setRotating] = useState(true) 
+    const [rotating2,setRotating2] = useState(true) 
 
     const [id,setID] = useState()
    
@@ -32,7 +32,7 @@ import searchicon from './logos/lupa.png'
                 setUsers(res.data)
                 
                 if(res.data){
-                    setRotating(false)
+                    setRotating2(false)
                 }
                
             },error=>{
@@ -135,7 +135,7 @@ import searchicon from './logos/lupa.png'
         <div className="addheader"><h1>Usuários</h1></div>
         <div className="inputsearch"><input placeholder="Nome ou Número" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
         
-        {rotating ?<div className='loading'>
+        {rotating2 ?<div className='loading'>
           <RotatingLines   strokeColor="grey"
           strokeWidth="5"
           animationDuration="0.75"

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState,useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import edit from './logos/edit.png'
 import del from './logos/delete.png'
 import { useParams } from "react-router-dom";
@@ -25,7 +25,7 @@ function Participate(props){
     const [userid,setuserid]= useState()
     const [username,setusername] = useState()
     const [useradmin,setuseradmin] = useState()
-    const [rotating,setRotating] = useState(true)
+    const [rotating1,setRotating1] = useState(true)
 
 
     const {lockedButton} = useContext(AuthContext)
@@ -134,7 +134,7 @@ function Participate(props){
             setBtn(list.lockbtn)
             
             if([list]){
-                setRotating(false)
+                setRotating1(false)
             }
 
                 
@@ -188,10 +188,10 @@ function Participate(props){
     return(
     <div className="participatelist "  onClick={hidebox}>
     
-    <div className="addheader"><h1>Monitores</h1>{typeof alldata != "undefined" && alldata[0] && !rotating &&<h2>Festa: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={hidecontainer}>Participar</button></div>
+    <div className="addheader"><h1>Monitores</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Festa: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={hidecontainer}>Participar</button></div>
     
 
-    {rotating ?<div className='loading'>
+    {rotating1 ?<div className='loading'>
           <RotatingLines   strokeColor="grey"
           strokeWidth="5"
           animationDuration="0.75"
