@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import {useState} from 'react'
-import img from './logos/logo.png'
+import img from './logos/loremipsumlogo1.png'
 import {Link, Navigate} from 'react-router-dom'
 import { AuthContext } from "./authcontroller";
 import { api } from "./api";
-import loginvideo from './login video/video.mp4'
+import img1 from './logos/wallpapperlorem.jpg'
 import InputMask from "react-input-mask";
 
 
@@ -92,7 +92,7 @@ import InputMask from "react-input-mask";
         <div className="logincontainer">
       
         <div id="login-login" className="login">
-        
+            
             <img className="spasso-picture" src={img} ></img>
             <form className="login-form">
            
@@ -109,7 +109,8 @@ import InputMask from "react-input-mask";
             </form>
             
         </div>
-        <video className="elementor-video"  src={loginvideo} autoPlay loop muted playsInline controlsList="nodownload" ></video>
+
+        <img className="elementor-video" src={img1}></img>
         </div>
 
 

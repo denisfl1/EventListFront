@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from './menu'
 import './App.css'
-import img from './logos/logo.png'
+import img from './logos/loremipsumlogo.png'
 
 
 
@@ -12,7 +12,7 @@ function Header(props){
         <>
         <header className="header">
         
-            <a href="https://spassosplash.com.br/"><img src={img} width={"150px"}></img></a>
+            <img src={img} width={"150px"}></img>
             <Menu></Menu>
         </header>
         

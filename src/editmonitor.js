@@ -92,7 +92,7 @@ function AddMonitor(props){
             <label for="names">Nome
             <input name={"names"} disabled={!props.useradmin}   type="text" onChange={(event)=> setNames(event.target.value)} defaultValue={names}></input>
             </label>
-            <label>Encher ?</label>
+            <label>Serviço Aux.?</label>
 
     
             <select onClick = {ocult} onChange={(event)=> setFills1(event.target.value)} >

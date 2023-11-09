@@ -6,6 +6,7 @@ import { AuthContext } from "./authcontroller";
 import EditUser from "./edituser";
 import { RotatingLines } from "react-loader-spinner";
 import searchicon from './logos/lupa.png'
+import Swal from "sweetalert2";
 
  function AllUsers(){
 
@@ -58,22 +59,46 @@ import searchicon from './logos/lupa.png'
             setSelect((copys)=>copys.filter((items)=>items !== value))
          
         }
-
+      
     }
-    
 
-    const excluir= async()=>{
+    const excluir= async(e)=>{
+        e.preventDefault()
 
-    await api.delete(`/delUsers/${select}`).then(
-        res=>{
-            
-        },error=>{
-           
-        }
-    )
+        Swal.fire({
+            title: `Deseja excluir este${select.length>1 ?"s" :""} usuário${select.length>1 ?"s" :""}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não"
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+
+                await api.delete(`/delUsers/${select}`).then(
+                    res=>{
+                    setUsers((prev)=>prev.map((it)=>it).filter((item)=>!select.includes(item._id)))
+                    Swal.fire({
+                        title: "Apagado com sucesso!",
+                        icon: "success"
+                    });
+                    setSelect([])
+                   
+
+                    },error=>{
+                       
+                    }
+                )
+
+            }
+          });
+
+
    
 
     }
+
 
     const OpenEdit=(e)=>{
     

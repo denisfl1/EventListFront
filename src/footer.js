@@ -15,7 +15,7 @@ return(
 
         <ul>
             <li>
-            © 2023 Buffet Spasso Splash. Todos os direitos reservados
+            © 2023 Buffet. Todos os direitos reservados
             </li>
         </ul>
 

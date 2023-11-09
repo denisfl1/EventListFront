@@ -99,7 +99,7 @@ function List(props){
         <div  className={"listform"} >
      
        
-        <h3>ADICIONE UMA FESTA</h3>
+        <h3>ADICIONE UM EVENTO</h3>
         
         <label for="date">Data da Festa </label>
         <input type='date' name={"date"} onChange={(event) => setDate(event.target.value)}></input>

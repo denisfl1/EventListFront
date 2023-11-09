@@ -82,7 +82,7 @@ function AddMonitor(props){
             <label for="names">Nome
             <input disabled={!props.useradmin} name={"names"}  type="text" onChange={(event)=> setNames(event.target.value)} defaultValue={names} ></input>
             </label>
-            <label>Encher ?</label>
+            <label>Serviço Aux.?</label>
             <select  name={"fills"}  onChange={(event)=> setFills(event.target.value)} defaultValue={fills}>
             <option value=" - ">-</option>
             <option value=" - ">NÃO</option>

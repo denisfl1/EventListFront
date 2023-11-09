@@ -1,11 +1,11 @@
 import React,{useContext} from "react";
 import {useState,useEffect} from 'react'
-import img from './logos/logo.png'
+import img from './logos/loremipsumlogo1.png'
 import { AuthContext} from "./authcontroller";
 import { api } from "./api";
 import { Navigate } from "react-router-dom";
-import loginvideo from './login video/video.mp4'
 import InputMask from "react-input-mask";
+import img1 from './logos/wallpapperlorem.jpg'
 
 
     function Register(){
@@ -145,7 +145,8 @@ import InputMask from "react-input-mask";
 
     return(
         <div className="logincontainer">
-           <video className="elementor-video"  src={loginvideo} autoPlay loop muted playsInline controlsList="nodownload" ></video>
+   
+           <img className="elementor-video" src={img1}></img>
         <div id="login-register" className="login" >
             
             <img className="spasso-picture" src={img} ></img>

@@ -140,11 +140,11 @@ function Participate(props){
                 
            })
            
-           SOCKET.on('participateerror',(error)=>{
+        //    SOCKET.on('participateerror',(error)=>{
            
-            return SOCKET.disconnect()
+        //     return SOCKET.disconnect()
             
-           })
+        //    })
            
            SOCKET.emit('participatelist',id)
 
@@ -188,7 +188,7 @@ function Participate(props){
     return(
     <div className="participatelist "  onClick={hidebox}>
     
-    <div className="addheader"><h1>Monitores</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Festa: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={hidecontainer}>Participar</button></div>
+    <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={hidecontainer}>Participar</button></div>
     
 
     {rotating1 ?<div className='loading'>
@@ -209,7 +209,7 @@ function Participate(props){
 
             <th> Nome </th>
 
-            <th>Encher</th>
+            <th>Serviço Auxiliar</th>
 
             <th>Editar</th>
 

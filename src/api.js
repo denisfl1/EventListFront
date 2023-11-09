@@ -15,11 +15,11 @@ const logout = ()=>{
 
 }
 
-export const SOCKET= io(process.env.REACT_APP_URL,{maxBufferSize:50,extraHeaders:{Authorization:localStorage.getItem("token")}})
+export const SOCKET= io('http://localhost:3000/',{maxBufferSize:50,extraHeaders:{Authorization:localStorage.getItem("token")}})
 
 
 export const api = axios.create({
-        baseURL: process.env.REACT_APP_URL,
+        baseURL: 'http://localhost:3000/',
     })
 
     

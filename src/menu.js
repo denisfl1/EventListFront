@@ -115,7 +115,7 @@ function Menu(props){
         {authenticated &&<li onClick={open} className={!click ? "dropdown " : " dropdown-open "} >{authenticated && name }<i className="dropdown-arrow"></i>
         <div className="dropdown-menu">
                 
-                <Link to={"/festas"}>Festas</Link>
+                <Link to={"/festas"}>Eventos</Link>
                 <a onClick={OpenAccount}>Minha Conta</a>
                 {lockedButton && <Link to={"/allusers"} >Usuários</Link>}
                 {lockedButton && <a onClick={OpenToken}>Token de Cadastro</a>}

@@ -70,7 +70,7 @@ export const AuthProvider = ({children})=>{
             setUser(loggedUser)
             navigate("/festas")
             
-            SOCKET.connect(process.env.REACT_APP_URL,{maxBufferSize:50,extraHeaders:{Authorization:token}})
+            SOCKET.connect('http://localhost:3000/',{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
        
 
@@ -92,11 +92,11 @@ export const AuthProvider = ({children})=>{
 
 
 return(
+    
     <AuthContext.Provider value={{authenticated:
         !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout}}>
-            {children}
-            
-        </AuthContext.Provider>
+            {children}     
+    </AuthContext.Provider>
 
 )
 

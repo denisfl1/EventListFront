@@ -51,7 +51,7 @@ function Feslist(props){
    
     const handlecheck= async (event)=>{
 
-        const checklist = event.target.checked // O valor está vindo o oposto da API ex:!true, !false
+        const checklist = event.target.checked 
         const id = event.target.id
        
        
@@ -166,11 +166,11 @@ function Feslist(props){
     
      
             
-            SOCKET.on('initialListError',(error)=>{
+            // SOCKET.on('initialListError',(error)=>{
                 
-            return SOCKET.disconnect()
+            // return SOCKET.disconnect()
 
-            })
+            // })
             
             SOCKET.emit('allList')
 
@@ -197,7 +197,7 @@ function Feslist(props){
     <div id={show1 ? "festcontainer-edit" : "festcontainer"} className={show ? 'festcontainer-open' : 'festcontainer' }  onClick={hide}>
       
       
-        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Festas Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>{setShowModal(true)}}>Adicionar Festa</button></div>
+        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>{setShowModal(true)}}>Novo Evento</button></div>
         
         {rotating && <div className='loading'>
           <RotatingLines   strokeColor="grey"
