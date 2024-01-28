@@ -107,9 +107,9 @@ function EditList(props){
         <form  className={"editlistform "} >
      
        
-        <h3>ADICIONE UMA FESTA</h3>
+        <h3>ADICIONE UM EVENTO</h3>
         
-        <label for="date">Data da Festa </label>
+        <label for="date">Data do Evento </label>
         <input type='date' name={"date"} onChange={(event) => setDate(event.target.value)} defaultValue={date}></input>
          
        

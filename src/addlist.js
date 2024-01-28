@@ -101,7 +101,7 @@ function List(props){
        
         <h3>ADICIONE UM EVENTO</h3>
         
-        <label for="date">Data da Festa </label>
+        <label for="date">Data do Evento</label>
         <input type='date' name={"date"} onChange={(event) => setDate(event.target.value)}></input>
          
        
