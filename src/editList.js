@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import './App.css';
 import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from './api';
+import { Shadow_container } from './components/shadow_container';
+import { AuthContext } from './authcontroller';
 
 
 
@@ -16,41 +18,41 @@ function EditList(props){
     const [extrachange,setExtraChange] = useState()
     const [extratime,setExtraTime] = useState()
 
-
+    const verify =()=>{return  extratime  && extratime  === " - "}
+    const{HandleShadow}= useContext(AuthContext)
     
-
     useEffect(() => {
         
-        const listAPI = async() =>{
+        (async()=>{
 
-        try{
-            const res = await api.get("/editId/" + editId)
-            const {_id,date,time,extratime} = res.data
-            const translatedate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            await api.get("/editId/" + editId).then(
+                res=>{
+                    const {_id,date,time,extratime} = res.data
 
-            setID(_id)
-            setDate(translatedate)
-            setTime(time)
-            setExtraTime(extratime)
-            setExtraChange(" - ")
+                    const translatedate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
+                    setID(_id)
+                    setDate(translatedate)
+                    setTime(time)
+                    setExtraTime(extratime)
+
+                    if(extratime && extratime  === " - ")return setExtraChange(false)
+                        return setExtraChange(true)
             
-           
+                }
+            )
+          
+        
+        })()
 
-        }catch(error){
-            
-        }
-
-
-        }
-        listAPI()
 
       },[editId]);
       
-  
+      
 
     const CheckOption = (e)=>{
         
-        if(e.target.value == "Não"){
+        if(!JSON.parse(e.target.value)){
             setExtraTime(" - ")
         }
 
@@ -59,12 +61,15 @@ function EditList(props){
 
 
 
-    const formatteddate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+  
     
 
     const save= async (e)=>{
 
+        const formatteddate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
 
+
+        
         await api.put("/editlist",{id,formatteddate,time,extratime}).then(
             res=>{
                 if(res.status == 200){
@@ -85,9 +90,9 @@ function EditList(props){
                       })
 
                 }
-                props.hidemodal1()
+                props.setShowModal1(false)
             },error=>{
-                props.hidemodal1()
+                props.setShowModal1(false)
             }
         )
         
@@ -102,7 +107,7 @@ function EditList(props){
 
     return(
       
-        <div className={props.show1 ? "shadowcontainer" : "shadowcontainer-hide"}>
+      <Shadow_container funcao={(e)=>HandleShadow(e)} id={"shadow_container"}>
         
         <form  className={"editlistform "} >
      
@@ -117,25 +122,24 @@ function EditList(props){
         <input type='time' name={"time"} onChange={(event) => setTime(event.target.value)} defaultValue={time}></input>
         
         <label>Hora Extra</label>
-        <select name={"extrachange"} onClick={CheckOption} onChange={(event) => setExtraChange(event.target.value)} defaultValue={extrachange}>      
+        <select name={"extrachange"} onClick={CheckOption} onChange={(event) => setExtraChange(JSON.parse(event.target.value))} value={extrachange}>      
             
-            <option Value=" - " selected={" - "} >-</option>
-            <option Value="Não" >NÃO</option>
-            <option Value="Sim" >SIM</option>
+        
+            <option value={false} selected={verify()} >NÃO</option>
+            <option value={true} selected={!verify()}>SIM</option>
 
           
         </select>
         <label>Horas a Mais</label>
-        <input name={"time"} disabled ={extrachange == " - " || extrachange == "Não"  } type='time' onChange={(event) => setExtraTime(event.target.value)} defaultValue={extratime}></input>
+        <input name={"time"} disabled ={!extrachange} type='time' onChange={(event) => setExtraTime(event.target.value)} value={extratime}></input>
       
     
-        <div className='editbuttons'><button type="reset" id="cancel"  onClick={props.hidemodal1}>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
+        <div className='editbuttons'><button type="reset" id="cancel"  onClick={props.s}>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
         
         </form>
 
-        </div>
 
-        
+        </Shadow_container>
  
 ) 
 

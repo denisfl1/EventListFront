@@ -9,10 +9,19 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
     const [lockedButton,setLockedButton] = useState()
+    const [shadowcontainer,setShadowContainer] = useState({addList:false,editList:false})
+
+
+    const HandleShadow=(e)=>{
+        
+  
+        if(e.target.id === "shadow_container" || e.target.id === "cancel")return setShadowContainer({addList:false,ediList:false})   
+
+    }
   
 
     const recoveredUser = localStorage.getItem("userdata");
@@ -68,7 +77,7 @@ export const AuthProvider = ({children})=>{
     
 
             setUser(loggedUser)
-            navigate("/festas")
+            // navigate("/festas")
             
             SOCKET.connect('http://localhost:3000/',{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
@@ -94,8 +103,8 @@ export const AuthProvider = ({children})=>{
 return(
     
     <AuthContext.Provider value={{authenticated:
-        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout}}>
-            {children}     
+        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout,HandleShadow,shadowcontainer,setShadowContainer}}>
+            {children}   
     </AuthContext.Provider>
 
 )

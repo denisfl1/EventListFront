@@ -27,17 +27,17 @@ function Feslist(props){
     const [rotating,setRotating] = useState(true)
    
 
-    const {lockedButton} = useContext(AuthContext)
+    const {lockedButton,shadowcontainer,setShadowContainer} = useContext(AuthContext)
   
 
-    function hide(e){
+    // const hide=(e)=>{
     
-    if(e.target.className == 'addlist' || e.target.className == "shadowcontainer"){
-        setShowModal(false)
-        setShowModal1(false)
+    // if(e.target.className == 'addlist' || e.target.className == "shadowcontainer"){
+    //     setShowModal(false)
+    //     setShowModal1(false)
         
-    }
-    }
+    // }
+    // }
 
     const participate = (event) =>{
     
@@ -54,13 +54,11 @@ function Feslist(props){
         const checklist = event.target.checked 
         const id = event.target.id
        
-       
-
         await api.put("/editlockbutton",{id,checklist}).then(
             res=>{
             
             },error=>{
-                
+                console.log(error)
            
             }
         )
@@ -68,39 +66,15 @@ function Feslist(props){
     }
     
 
-    const handleEdit = (event)=>{
+    const handleEdit = (id)=>{
    
     
-    const id = event.target.id
-    setEditId(id)
+    const ID = id
+    setEditId(ID)
+    shadowcontainer.editList = true
   
- 
-    if(!show){
-        setShowModal1(true)
-    
-    }else{
-        setShowModal1(false)
-    }    
+  
     }
-
-
-
-
-    function hidemodal(){
-
-        setShowModal(false)
-        
-    }
-
-    function hidemodal1(){
-
-    
-        setShowModal1(false)
-     
-        
-    }
-
-
 
 
     const delEvent  = async (e)=>{
@@ -194,10 +168,10 @@ function Feslist(props){
        
     
    
-    <div id={show1 ? "festcontainer-edit" : "festcontainer"} className={show ? 'festcontainer-open' : 'festcontainer' }  onClick={hide}>
+    <div id={show1 ? "festcontainer-edit" : "festcontainer"} className={show ? 'festcontainer-open' : 'festcontainer' }>
       
       
-        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>{setShowModal(true)}}>Novo Evento</button></div>
+        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>shadowcontainer.addList = true}>Novo Evento</button></div>
         
         {rotating && <div className='loading'>
           <RotatingLines   strokeColor="grey"
@@ -244,8 +218,8 @@ function Feslist(props){
               <td>{value.time}</td>
               <td>{value.extratime}</td>
               <td><Link to={`/participatelist/${value._id}`}><img onClick={participate} id={value._id} className='icon' src={icon}></img></Link></td>
-              <td hidden={!lockedButton}><input onClick={handlecheck} id={value._id} className='activatelist' type="checkbox" checked={value.lockbtn} defaultValue={value.lockbtn} ></input></td>
-              <td hidden={!lockedButton}><img  onClick={handleEdit} id={value._id} className="edit" src={edit}>
+              <td hidden={!lockedButton}><input onClick={handlecheck} id={value._id} className='activatelist' type="checkbox" checked={value.lockbtn} value={value.lockbtn} ></input></td>
+              <td hidden={!lockedButton}><img  onClick={()=>handleEdit(value._id)} id={value._id} className="edit" src={edit}>
               </img></td>
               <td hidden={!lockedButton}><img onClick={delEvent} id={value._id} className='del' src={del}></img></td>
 
@@ -267,8 +241,8 @@ function Feslist(props){
            
             
 
-            <Addlist  show={show} hidemodal={hidemodal} />
-            <EditList editId={editId} show1={show1} hidemodal1={hidemodal1} />
+            {shadowcontainer.addList && <Addlist />}
+            {shadowcontainer.editList && <EditList editId={editId}/>}
             
       
         

@@ -11,15 +11,12 @@ function AddMonitor(props){
 
     const id = props.id
 
-
-    const addNameandFill = async (event,req,res)=>{
+    const addNameandFill = async (event)=>{
         event.preventDefault()
 
 
-        if(!names.trim()){
-         return 
-        }
-      
+        if(!names.trim())return 
+    
 
           await api.post("/addnameandfill",{id,names,fills}).then
           (res =>{
@@ -60,11 +57,7 @@ function AddMonitor(props){
             })
             
             props.hidecontainer()
-           
-       
         
-        
-
         
     }
 
@@ -80,10 +73,10 @@ function AddMonitor(props){
             
             <div className={props.monitorcontainer ? "addmonitor" : "addmonitor-hide"}>
             <label for="names">Nome
-            <input disabled={!props.useradmin} name={"names"}  type="text" onChange={(event)=> setNames(event.target.value)} defaultValue={names} ></input>
+            <input disabled={!props.useradmin} name={"names"}  type="text" onChange={(event)=> setNames(event.target.value)} value={names} ></input>
             </label>
             <label>Serviço Aux.?</label>
-            <select  name={"fills"}  onChange={(event)=> setFills(event.target.value)} defaultValue={fills}>
+            <select  name={"fills"}  onChange={(event)=> setFills(event.target.value)} value={fills}>
             <option value=" - ">-</option>
             <option value=" - ">NÃO</option>
             <option value="SIM">SIM</option>

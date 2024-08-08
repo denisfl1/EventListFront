@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { api } from "./api";
 import Swal from "sweetalert2";
+import { Shadow_container } from "./components/shadow_container";
 
 
 function TokenGen(props){
@@ -40,15 +41,19 @@ function TokenGen(props){
 
     return(
 
-        <div className={props.Tokenwindow ?"shadowcontainer" : "shadowcontainer-hide"} onClick={props.HideShadow} >
-        <div className={props.Tokenwindow  ?"tokengencontainer" : "tokengencontainer-hide"}>
+        <Shadow_container onClick={props.OpenToken}>
+
+
+        <div className={"tokengencontainer"}>
 
             <h3>Novo Token</h3>
 
                 <input defaultValue={token ? token : ""} value={token ? token : ""}></input>
                 <div className="tokenbuttons"><button id="canceltoken" onClick={props.OpenToken} >FECHAR</button><button id="genbutton" onClick={getToken}>GERAR</button></div>
         </div>
-        </div>
+  
+
+        </Shadow_container>
       
     )     
 
