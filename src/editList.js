@@ -6,7 +6,7 @@ import moment from 'moment-timezone'
 import { api } from './api';
 import { Shadow_container } from './components/shadow_container';
 import { AuthContext } from './authcontroller';
-
+import { EventForm } from './components/Event_Form';
 
 
 function EditList(props){
@@ -18,8 +18,8 @@ function EditList(props){
     const [extrachange,setExtraChange] = useState()
     const [extratime,setExtraTime] = useState()
 
-    const verify =()=>{return  extratime  && extratime  === " - "}
-    const{HandleShadow,shadowcontainer}= useContext(AuthContext)
+   
+    const{HandleShadow,handleCancelClick}= useContext(AuthContext)
     
     useEffect(() => {
         
@@ -50,26 +50,10 @@ function EditList(props){
       
       
 
-    const CheckOption = (e)=>{
-        
-        if(!JSON.parse(e.target.value)){
-            setExtraTime(" - ")
-        }
-
-    }
-
-
-
-
-  
-    
-
-    const save= async (e)=>{
-
+    const enviar = async ()=>{
+     
         const formatteddate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
-
-
-        
+ 
         await api.put("/editlist",{id,formatteddate,time,extratime}).then(
             res=>{
                 if(res.status == 200){
@@ -88,11 +72,11 @@ function EditList(props){
                        
                      
                       })
-
+                   return handleCancelClick()
                 }
              
             },error=>{
-                
+                console.log(error)
             }
         )
         
@@ -109,34 +93,22 @@ function EditList(props){
       
       <Shadow_container funcao={(e)=>HandleShadow(e)} >
         
-        <form  className={"editlistform "} >
-     
-       
-        <h3>ADICIONE UM EVENTO</h3>
-        
-        <label for="date">Data do Evento </label>
-        <input type='date' name={"date"} onChange={(event) => setDate(event.target.value)} defaultValue={date}></input>
-         
-       
-        <label for="time">Horário</label>
-        <input type='time' name={"time"} onChange={(event) => setTime(event.target.value)} defaultValue={time}></input>
-        
-        <label>Hora Extra</label>
-        <select name={"extrachange"} onClick={CheckOption} onChange={(event) => setExtraChange(JSON.parse(event.target.value))} value={extrachange}>      
-            
-        
-            <option value={false} selected={verify()} >NÃO</option>
-            <option value={true} selected={!verify()}>SIM</option>
 
-          
-        </select>
-        <label>Horas a Mais</label>
-        <input name={"time"} disabled ={!extrachange} type='time' onChange={(event) => setExtraTime(event.target.value)} value={extratime}></input>
-      
-    
-        <div className='editbuttons'><button type="reset" id="cancel"  onClick={()=>shadowcontainer.editList = false }>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
-        
-        </form>
+        <EventForm 
+                
+                date={date}
+                setDate={setDate}
+                time={time}
+                setTime={setTime}
+                extrachange={extrachange}
+                setExtraChange={setExtraChange}
+                extratime={extratime}
+                setExtraTime={setExtraTime}
+                // CheckOption={CheckOption}
+                enviar={enviar}
+                handleCancelClick={handleCancelClick}>
+                 
+        </EventForm>
 
 
         </Shadow_container>

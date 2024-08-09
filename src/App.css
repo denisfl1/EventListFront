@@ -404,79 +404,6 @@ a{
 }
 
 
-
-.listform,
-.editlistform 
-{
-  position: relative;
-  width: 380px;
-  height: 490px;
-  min-height: 490px;;
-  align-items: center;
-  background-color:#3a3f3e;;
-  border-radius: 5px;
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  margin: auto;
-  font-size:18px;
-  font-family:'Poppins',sans-serif;
-  color:white;
-  box-shadow:  0px 0px 10px 6px #00000078;
-}
-
-
-
-.listform input,
-.editlistform input{
-  width: 250px;
-  height: 40px;
-  text-align: center;
-  margin-top: 2px;
-  border-radius: 5px;
-  font-size: 18px;
-  border: none;
-  box-shadow: 1px 1px 6px #0000005e;
-  
-}
-.listform select,
-.editlistform select{
-  width: 250px;
-  margin-top: 2px;
-  border-radius: 5px;
-  text-align: center;
-  height: 40px;
-  border: none;
-  box-shadow: 1px 1px 6px #0000005e;
-
-}
-
-.listform label,
-.editlistform label{
-  margin-top: 12px;
-}
-
-.listform button,
-.editlistform button{
-  font-family: 'Poppins',sans-serif;
-  background-color:  #3085d6;
-  color: white;
-  border: none;
-  margin-top: 20px;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  font-size:14px;
-  font-weight: bold;
-}
-
-.listform button:hover{
-  background-color: #2674b9;
-  transition: background 0.2s;
-
-}
-
-
 #save{
   background-color: #0e78d4;
   width: 115px;
@@ -506,7 +433,7 @@ a{
   min-height: 100vh;
 }
 
-.festcontainer,.festcontainer-hide {
+.festcontainer{
   padding-bottom: 2rem;
 }
 

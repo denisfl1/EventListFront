@@ -38,6 +38,15 @@ export const AuthProvider = ({children})=>{
             })   
 
     }
+
+    const handleCancelClick = () => {
+        if (shadowcontainer.addList) {
+            shadowcontainer.addList = false;
+        } else {
+            shadowcontainer.editList = false;
+        }
+    };
+    
   
 
     const recoveredUser = localStorage.getItem("userdata");
@@ -119,7 +128,7 @@ export const AuthProvider = ({children})=>{
 return(
     
     <AuthContext.Provider value={{authenticated:
-        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout,HandleShadow,shadowcontainer,setShadowContainer}}>
+        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout,HandleShadow,shadowcontainer,setShadowContainer,handleCancelClick}}>
             {children}   
     </AuthContext.Provider>
 

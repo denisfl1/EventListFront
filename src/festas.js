@@ -30,15 +30,6 @@ function Feslist(props){
     const {lockedButton,shadowcontainer,setShadowContainer} = useContext(AuthContext)
   
 
-    // const hide=(e)=>{
-    
-    // if(e.target.className == 'addlist' || e.target.className == "shadowcontainer"){
-    //     setShowModal(false)
-    //     setShowModal1(false)
-        
-    // }
-    // }
-
     const participate = (event) =>{
     
     
@@ -158,7 +149,7 @@ function Feslist(props){
 
     },[festlist])
 
- 
+    
 
 
 

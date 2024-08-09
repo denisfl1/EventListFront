@@ -70,9 +70,8 @@ function App() {
     <BrowserRouter>
     <AuthProvider>
     <Header></Header>
-    
-    
     <Routes>
+
     <Route path="/participatelist/:id" element={<Private><Participate/></Private>}></Route>
     <Route path="/festas"  element={<Private><Festas/></Private>} > </Route>
     <Route path="/allusers"element={<Private><Users></Users></Private>}></Route>
@@ -80,6 +79,7 @@ function App() {
     <Route path="/register" element={<LoginRedirect><Register/></LoginRedirect>}></Route> 
     <Route path="/participatelist/:id/*" element={<Private><Participate/></Private>}></Route>
     <Route path="*" element={<Private><Festas/></Private>}></Route> 
+    
     </Routes>
     <Footer/>
 
