@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { api } from "./api";
 import InputMask from "react-input-mask";
 import Swal from "sweetalert2";
+import { Shadow_container } from "./components/shadow_container";
+import { AuthContext } from "./authcontroller";
 
 
 function MyAccount(props){
@@ -12,6 +14,7 @@ function MyAccount(props){
     const [password1,setPassword1] = useState()
     const [admin,setAdmin] = useState(props.admin)
     const [id,setID] = useState(props.id)
+    const {HandleShadow,shadowcontainer} = useContext(AuthContext)
 
         const [error,setError] = useState({
             fullname:false,
@@ -95,31 +98,31 @@ function MyAccount(props){
                 }
                   
                 },error=>{
-                   props.CloseMyAccount()
-                    switch(error.response.data){
-                        case "Número já existe":
-                           
-                        setError({matchnumber:true})
-                        Swal.fire({
+                    
+                   if(error.response.data == "Número já existe"){
 
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Número já Existe!',
-                            // confirmButtonColor:'#3085d6',
-                            // confirmButtonText:"Fechar",
-                            width:"350px",
-                            // buttonsStyling:false,
-                            showConfirmButton:false,
-                            heightAuto:false,
-                            height:'360px',
-                            customClass:'swal-wide',
-                            timer:1500
-                        
-                             
-                          })
+                    setError({matchnumber:true})
+                    Swal.fire({
+
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Número já Existe!',
+                        // confirmButtonColor:'#3085d6',
+                        // confirmButtonText:"Fechar",
+                        width:"350px",
+                        // buttonsStyling:false,
+                        showConfirmButton:false,
+                        heightAuto:false,
+                        height:'360px',
+                        customClass:'swal-wide',
+                        timer:1500
+                    
                          
-                      break  
-                    }
+                      })
+
+
+                   }
+        
              
                 }
             )
@@ -132,9 +135,9 @@ function MyAccount(props){
 
     return(
 
-        <div className={props.Account ?"shadowcontainer" :"shadowcontainer-hide"} onClick={props.HideShadow}>
+        <Shadow_container funcao={(e)=>HandleShadow(e)}>
     
-        <div id={props.Account ? "EditMyUser" : "EditMyUser-hide"} className={"EditUser"}>
+        <div id={"EditMyUser"}  className={"EditUser"}>
             <h3>DADOS PESSOAIS</h3>
     
             {error.fullname ?<label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
@@ -151,12 +154,12 @@ function MyAccount(props){
             {error.password1 ? <label  id="inputmatch" for="password1">Senhas Diferentes</label>:<label for="password1">Confirme a Senha</label>}
             <input className={error.password1 && "form-input invalid"} type="password"  name="password1"  onChange={handleChangePassword1} ></input>
            
-           <div className="editbuttons"> <button type="reset"  onClick={props.HideShadow} id="canceledituser">CANCELAR</button> <button  onClick={saveSettings} id="saveedituser">SALVAR</button></div>
+           <div className="editbuttons"> <button onClick={()=>shadowcontainer.Myaccount = false} type="reset" id="canceledituser">CANCELAR</button> <button  onClick={saveSettings} id="saveedituser">SALVAR</button></div>
     
     
         </div>
     
-        </div>
+        </Shadow_container>
     )
 
 

@@ -19,7 +19,7 @@ function EditList(props){
     const [extratime,setExtraTime] = useState()
 
     const verify =()=>{return  extratime  && extratime  === " - "}
-    const{HandleShadow}= useContext(AuthContext)
+    const{HandleShadow,shadowcontainer}= useContext(AuthContext)
     
     useEffect(() => {
         
@@ -90,9 +90,9 @@ function EditList(props){
                       })
 
                 }
-                props.setShowModal1(false)
+             
             },error=>{
-                props.setShowModal1(false)
+                
             }
         )
         
@@ -107,7 +107,7 @@ function EditList(props){
 
     return(
       
-      <Shadow_container funcao={(e)=>HandleShadow(e)} id={"shadow_container"}>
+      <Shadow_container funcao={(e)=>HandleShadow(e)} >
         
         <form  className={"editlistform "} >
      
@@ -134,7 +134,7 @@ function EditList(props){
         <input name={"time"} disabled ={!extrachange} type='time' onChange={(event) => setExtraTime(event.target.value)} value={extratime}></input>
       
     
-        <div className='editbuttons'><button type="reset" id="cancel"  onClick={props.s}>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
+        <div className='editbuttons'><button type="reset" id="cancel"  onClick={()=>shadowcontainer.editList = false }>CANCELAR</button><button type="reset" id='save' onClick={save}>SALVAR</button></div>
         
         </form>
 

@@ -168,7 +168,7 @@ function Feslist(props){
        
     
    
-    <div id={show1 ? "festcontainer-edit" : "festcontainer"} className={show ? 'festcontainer-open' : 'festcontainer' }>
+    <div className={'festcontainer'}>
       
       
         <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>shadowcontainer.addList = true}>Novo Evento</button></div>
@@ -239,7 +239,6 @@ function Feslist(props){
             </table>}  
 
            
-            
 
             {shadowcontainer.addList && <Addlist />}
             {shadowcontainer.editList && <EditList editId={editId}/>}

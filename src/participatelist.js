@@ -8,6 +8,7 @@ import { api,SOCKET} from "./api";
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";
 import { RotatingLines } from "react-loader-spinner";
+import { Shadow_container } from "./components/shadow_container";
 
 
 
@@ -19,8 +20,6 @@ function Participate(props){
     const [time,setTime] = useState()
     const [extratime,setExtraTime] = useState()
     const [btn,setBtn] = useState()
-    const [monitorcontainer,setMonitorcontainer] = useState()
-    const [monitoreditcontainer,setMonitoreditcontainer] = useState()
     const [position,setPosition] = useState()
     const [userid,setuserid]= useState()
     const [username,setusername] = useState()
@@ -28,59 +27,20 @@ function Participate(props){
     const [rotating1,setRotating1] = useState(true)
 
 
-    const {lockedButton} = useContext(AuthContext)
-
-    const hidecontainer = async (req,res)=>{
-
+    const {lockedButton,shadowcontainer} = useContext(AuthContext)
     
-
-    if(!monitorcontainer){
-        setMonitorcontainer(true)
-    }else{
-        setMonitorcontainer(false)
-    }
-    
-
-    }
-
-    const hidecontaineredit = () =>{
-    
-
-    if(!monitoreditcontainer){
-        setMonitoreditcontainer(true)
-    }else{
-        setMonitoreditcontainer(false)
-    }
-
-
-    }
 
     const getID =(event)=>{
 
-
-
+        shadowcontainer.addMonitor = true
         setPosition(event.target.id)
         
-     hidecontaineredit()
-    }
-
-    const hidebox =  (event)=>{
-
-
-
-    if(event.target.className == "shadowcontainer" || event.target.className == "shadowcontaineredit"){
-        setMonitorcontainer(false)
-        setMonitoreditcontainer(false)
-        
-    }
-    
 
     }
-   
+
     const delmonitor = async (event)=>{
     
     const position = event.target.id
-        
         
     await api.put(`/delnamesandfills/${id}`,{position}).then(
         res=>{
@@ -186,9 +146,9 @@ function Participate(props){
 
 
     return(
-    <div className="participatelist "  onClick={hidebox}>
+    <div className="participatelist ">
     
-    <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={hidecontainer}>Participar</button></div>
+    <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={()=>shadowcontainer.addMonitor = true}>Participar</button></div>
     
 
     {rotating1 ?<div className='loading'>
@@ -229,7 +189,7 @@ function Participate(props){
                     <td>{1 + index++}</td>
                     <td>{value.names[key]}</td>
                     <td>{value.fills[key]}</td>
-                    <td><img hidden={userid !== value.myID[key] && !lockedButton} id={key}  onClick={getID} className="edit" src={edit} ></img></td>
+                    <td><img hidden={userid !== value.myID[key] && !lockedButton} id={key}  onClick={(event)=>getID(event)} className="edit" src={edit} ></img></td>
                     <td><img hidden={userid !== value.myID[key] && !lockedButton} id={key} name={value.myID[key]}  className="del" src={del} onClick={delmonitor}></img></td>
                 </tr>
             
@@ -247,8 +207,8 @@ function Participate(props){
 
     </table>}
 
-        <AddMonitor id={id} userid={userid} username={username} useradmin={useradmin} monitorcontainer={monitorcontainer} hidecontainer={hidecontainer}></AddMonitor>
-        <EditMonitor id={id}  useradmin={useradmin} position={position}  monitoreditcontainer={monitoreditcontainer} hidecontaineredit={hidecontaineredit}></EditMonitor>
+        {shadowcontainer.addMonitor && <AddMonitor id={id} userid={userid} username={username} useradmin={useradmin}></AddMonitor>}
+        {shadowcontainer.editMonitor && <EditMonitor id={id}  useradmin={useradmin} position={position} ></EditMonitor>}
     </div>)
 
 

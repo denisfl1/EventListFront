@@ -15,7 +15,7 @@ function List(props){
     const [time,setTime] = useState(" ")
     const [extrachange,setExtraChange] = useState(false)
     const [extratime,setExtraTime] = useState()
-    const {HandleShadow} = useContext(AuthContext)
+    const {HandleShadow,shadowcontainer} = useContext(AuthContext)
 
     const CheckOption = (e)=>{
      
@@ -61,7 +61,7 @@ function List(props){
         await api.post("/newevent",{formattedDate,time,extratime}).then
         (res=>{
 
-            
+         if(res.status === 200){
         Swal.fire({
         position: 'center',
         icon: 'success',
@@ -75,15 +75,17 @@ function List(props){
      
       })
       
-       props.setShowModal(false)
-    
-            
+     return shadowcontainer.addList = false
+
+    }
+
+       
         },error=>{
          
         })
 
     }   
-        
+  
        
     }
 
@@ -92,7 +94,7 @@ function List(props){
    
 
     return(
-            <Shadow_container funcao={(e)=>HandleShadow(e)} id={"shadow_container"}>
+            <Shadow_container funcao={(e)=>HandleShadow(e)}>
       
             <div  className={"listform"} >
      
@@ -117,7 +119,7 @@ function List(props){
                     <input name={"time"} disabled ={!extrachange} type='time' onChange={(event) => setExtraTime(event.target.value)} defaultValue={extratime} ></input>
                 
                 
-                    <div className='editbuttons'><button  id="cancel"  onClick={(e)=>HandleShadow(e)} >CANCELAR</button><button  id="save" onClick={enviar}>ADICIONAR</button></div>
+                    <div className='editbuttons'><button  id="cancel"  onClick={()=>shadowcontainer.addList= false} >CANCELAR</button><button  id="save" onClick={enviar}>ADICIONAR</button></div>
                     </div> 
 
            

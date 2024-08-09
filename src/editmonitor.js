@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
+import { AuthContext } from "./authcontroller";
+import { Shadow_container } from "./components/shadow_container";
 
 
 function AddMonitor(props){
@@ -8,7 +10,7 @@ function AddMonitor(props){
     const [names,setNames] = useState()
     const [fills1,setFills1] = useState()
     const [ocultOption,setOcultOption] = useState(false)
-    
+    const {shadowcontainer,HandleShadow} = useContext(AuthContext)
 
     const id = props.id
     const position = props.position
@@ -76,7 +78,6 @@ function AddMonitor(props){
                 
               })
               
-              props.hidecontaineredit()
 
               
         
@@ -86,9 +87,9 @@ function AddMonitor(props){
    
 
         return(
-            <div className={props.monitoreditcontainer ? "shadowcontaineredit" : "shadowcontaineredit-hide"}>
+            <Shadow_container funcao={(e)=>HandleShadow(e)}>
             
-            <form className={props.monitoreditcontainer ? "editmonitor" : "editmonitor-hide"}>
+            <form className={"editmonitor"}>
             <label for="names">Nome
             <input name={"names"} disabled={!props.useradmin}   type="text" onChange={(event)=> setNames(event.target.value)} defaultValue={names}></input>
             </label>
@@ -103,10 +104,10 @@ function AddMonitor(props){
 
 
             </select>
-            <div className="monitorsbuttons"><button type="reset" onClick={props.hidecontaineredit} id="cancelbtn">Cancelar</button><button  type="reset" onClick={UpdateNamesandFills} id="savebtn">Salvar</button></div>
+            <div className="monitorsbuttons"><button type="reset" onClick={()=>shadowcontainer.editMonitor = false} id="cancelbtn">Cancelar</button><button  type="reset" onClick={UpdateNamesandFills} id="savebtn">Salvar</button></div>
             </form>
            
-            </div>
+            </Shadow_container>
         )
 
 

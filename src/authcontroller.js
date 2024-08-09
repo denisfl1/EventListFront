@@ -1,5 +1,5 @@
 import React,{useState,createContext,useEffect} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { api, SOCKET } from './api';
 
 
@@ -9,17 +9,33 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
 
-    // const navigate = useNavigate()
+    
     const [user,setUser] = useState(null)
     const [loading,setLoading] = useState(true)
     const [lockedButton,setLockedButton] = useState()
-    const [shadowcontainer,setShadowContainer] = useState({addList:false,editList:false})
+    const [shadowcontainer,setShadowContainer] = useState({
+        addList:false,
+        editList:false,
+        token:false,
+        myAccount:false,
+        addMonitor:false,
+        editMonitor:false,
+    
+    })
 
 
     const HandleShadow=(e)=>{
-        
-  
-        if(e.target.id === "shadow_container" || e.target.id === "cancel")return setShadowContainer({addList:false,ediList:false})   
+      
+        if(e.target.id === "shadow_container" )return setShadowContainer(
+            {
+                addList:false,
+                ediList:false,
+                token:false,
+                myAccount:false,
+                addMonitor:false,
+                editMonitor:false,
+            
+            })   
 
     }
   
@@ -77,7 +93,7 @@ export const AuthProvider = ({children})=>{
     
 
             setUser(loggedUser)
-            // navigate("/festas")
+  
             
             SOCKET.connect('http://localhost:3000/',{maxBufferSize:50,extraHeaders:{Authorization:token}})
         
@@ -94,7 +110,7 @@ export const AuthProvider = ({children})=>{
         api.defaults.headers.Authorization = null
         SOCKET.io.opts.extraHeaders = { Authorization: null }
         setUser(null)
-    //    return SOCKET.disconnect()
+       return SOCKET.disconnect()
 
 
   }

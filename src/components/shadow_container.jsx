@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export function Element_Shadow_Container ({id,className,funcao,children}){
+export function Element_Shadow_Container ({className,funcao,children}){
+    
 
     return(
-        <div id={id} className={className} onClick={funcao}>
+        <div id={"shadow_container"} className={className} onClick={funcao}>
             {children}
         </div>
     )
@@ -13,8 +14,6 @@ export function Element_Shadow_Container ({id,className,funcao,children}){
 
 
 export const Shadow_container = styled(Element_Shadow_Container)`
-
-
 
 min-width:100%;
 min-height:100vh;

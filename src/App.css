@@ -403,20 +403,6 @@ a{
   margin-bottom: 5px;
 }
 
-.listform {
-  display: flex;
-} 
-
-
-
-
-.editlistform{
-  display: flex;
-
-}
-
-
-
 
 
 .listform,
@@ -630,20 +616,6 @@ a{
   width: 100px;
   border:none;
   border-radius: 5px;
-}
-
-
-.shadowcontainer,
-.shadowcontaineredit{
-  margin: auto;
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: rgba(0,0,0,0.2);
-  position:fixed;
-  top:0;
-  left:0;
-  display:flex;
-  z-index: 0;
 }
 
 

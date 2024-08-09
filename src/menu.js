@@ -10,17 +10,14 @@ function Menu(props){
 
     const {authenticated,logout} = useContext(AuthContext)
     const [click,setClick] = useState(false)
-    const [Account,setAcccount] = useState(false)
     const [name,setName] = useState()
     const [number,setNumber] = useState()
     const [admin,setAdmin] = useState()
     const [id,setID] = useState()
-    const [Tokenwindow,setToken] = useState(false)
 
-    const{loading,lockedButton,setLockedButton} = useContext(AuthContext)
+    const{loading,lockedButton,setLockedButton,shadowcontainer} = useContext(AuthContext)
   
   
-   
     const authbutton=()=>{
     
         if(authenticated){
@@ -37,39 +34,6 @@ function Menu(props){
         }setClick(false)    
     }
 
-    function HideShadow(e){
-
-    if(e.target.className == "shadowcontainer" || e.target.id == "canceledituser" ||e.target.id =="cenceltoken" ){
-        setAcccount(false)
-        setToken(false)
-    }
-
-    }
-    const CloseMyAccount=()=>{
-
-        setAcccount(false)
-
-    }
-
-    const OpenAccount=()=>{
-    if(!Account){
-        setAcccount(true)
-    return
-    } 
-    setAcccount(false)
-
-    }
-
-    const OpenToken=()=>{
-
-    if(!Tokenwindow){
-        setToken(true)
-    return
-    } 
-    setToken(false)
-
-    }
-   
 
     useEffect(()=>{
 
@@ -116,9 +80,9 @@ function Menu(props){
         <div className="dropdown-menu">
                 
                 <Link to={"/festas"}>Eventos</Link>
-                <a onClick={OpenAccount}>Minha Conta</a>
+                <a onClick={()=>shadowcontainer.Myaccount = true}>Minha Conta</a>
                 {lockedButton && <Link to={"/allusers"} >Usuários</Link>}
-                {lockedButton && <a onClick={OpenToken}>Token de Cadastro</a>}
+                {lockedButton && <a onClick={()=>shadowcontainer.token = true}>Token de Cadastro</a>}
                 <a onClick={authbutton}>Sair</a>
                 </div>
         </li>}
@@ -127,8 +91,8 @@ function Menu(props){
         </ul>
        
         </nav>
-        {Account && <Myaccount id={id} name={name} number={number} admin={admin} HideShadow={HideShadow} CloseMyAccount={CloseMyAccount}Account={Account}/>}
-        {Tokenwindow && <TokenGen OpenToken={OpenToken} Tokenwindow={Tokenwindow} HideShadow={HideShadow} />}
+        {shadowcontainer.Myaccount && <Myaccount id={id} name={name} number={number} admin={admin} />}
+        {shadowcontainer.token && <TokenGen  />}
         </>
     )
 
