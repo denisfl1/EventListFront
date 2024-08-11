@@ -8,8 +8,8 @@ import { api,SOCKET} from "./api";
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";
 import { RotatingLines } from "react-loader-spinner";
-import { Table } from "./components/table";
-import {Table_Container} from "./components/container"
+import { Table } from "./styled_componets/table";
+import {Table_Container} from "./styled_componets/container"
 
 
 function Participate(){
@@ -161,13 +161,18 @@ function Participate(){
           visible={true} />
         </div> :
 
-        <Table
-        th1={'#ID'}
-        th2={'Nome'}
-        th3={'Serviço Auxiliar'}
-        th4={'Editar'}
-        th5={'Excluir'}>
-      
+        <Table>
+
+
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Nome</th>
+                <th>Serviço Auxiliar</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
         
     <tbody className={id}>
 

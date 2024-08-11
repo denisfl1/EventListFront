@@ -7,6 +7,8 @@ import EditUser from "./edituser";
 import { RotatingLines } from "react-loader-spinner";
 import searchicon from './logos/lupa.png'
 import Swal from "sweetalert2";
+import { Table_Container } from "./styled_componets/container";
+import { Table } from "./styled_componets/table";
 
  function AllUsers(){
 
@@ -137,7 +139,8 @@ import Swal from "sweetalert2";
     
 
     return(
-        <div className="participatelist" >
+     
+        <Table_Container participate>
 
         <div className="addheader"><h1>Usuários</h1></div>
         <div className="inputsearch"><input placeholder="Nome ou Número" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
@@ -149,10 +152,12 @@ import Swal from "sweetalert2";
           width="50"
           visible={true} />
             </div>:
-        <table className='table '>
 
-        <thead>
 
+        <Table>
+
+            <thead>
+                
             <tr>
 
             <th>#ID</th>
@@ -166,8 +171,7 @@ import Swal from "sweetalert2";
             <th>Alterar</th>
 
             <th><form><button id="deleteuser" disabled={select == 0}  type="submit" onClick={excluir}>EXCLUIR</button></form></th>
-
-            
+  
             </tr>
 
         </thead>
@@ -187,10 +191,11 @@ import Swal from "sweetalert2";
 
         </tbody>
 
-        </table>}
-      {shadowcontainer.editUser && data && <EditUser data={data} /> }
+        </Table>}
 
-        </div>
+      {shadowcontainer.editUser && data && <EditUser data={data} /> }
+      </Table_Container>
+       
         
     )
 

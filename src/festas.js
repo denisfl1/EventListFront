@@ -13,10 +13,8 @@ import { api } from './api';
 import { AuthContext } from './authcontroller';
 import { SOCKET} from './api';
 import {RotatingLines} from 'react-loader-spinner'
-import { Table } from './components/table';
-import { Table_Container } from './components/container';
-
-
+import { Table } from  './styled_componets/table';
+import { Table_Container } from './styled_componets/container';
 
 
 function Feslist(props){
@@ -165,16 +163,22 @@ function Feslist(props){
               
         {!rotating && festlist.length > 0 &&
 
-        <Table 
-        th1={'#ID'} 
-        th2={'Data'}
-        th3={'Horário'} 
-        th4={'Hora Extra'} 
-        th5={'Participar'} 
-        th6={'OFF/ON'} 
-        th7={'Editar'}
-        th8={'Excluir'}
-        lockedButton={lockedButton} >
+        <Table>
+
+            <thead>
+                <tr>
+
+                <th>#ID</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Hora Extra</th>
+                <th hidden={!lockedButton}>Participar</th>
+                <th hidden={!lockedButton}>OFF/ON</th>
+                <th hidden={!lockedButton}>Editar</th>
+                <th hidden={!lockedButton}>Excluir</th>
+
+                </tr>
+            </thead>
      
              <tbody> 
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { api } from "./api";
 import Swal from "sweetalert2";
-import { Shadow_container } from "./components/shadow_container";
+import { Shadow_container } from "./styled_componets/shadow_container";
 import { AuthContext } from "./authcontroller";
 
 

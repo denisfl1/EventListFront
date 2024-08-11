@@ -94,7 +94,8 @@ import img1 from './logos/wallpapperlorem.jpg'
         
         if(values){
          ERROR.token = false 
-        numberCheck.empty = false
+         numberCheck.empty = false
+         
         }
     }
 
@@ -120,16 +121,10 @@ import img1 from './logos/wallpapperlorem.jpg'
                     }        
                 },error=>{ 
                     
-                    switch(error.response.data){
-                        case "Token Inválido":
-                        setError({token:true})
-                    break;
-                        case "Número já existe":
-                        setNumberCheck({login:true})
-                        break
-                    }
+                    if(error.response.data === "Token Inválido")return ERROR.token = true
 
-
+                    if(error.response.data === "Número já existe") return numberCheck.login = true 
+                   
 
                 }
             )
@@ -138,9 +133,6 @@ import img1 from './logos/wallpapperlorem.jpg'
             }
        
         }
-           
-
-    
     
 
     return(

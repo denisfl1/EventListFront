@@ -14,13 +14,14 @@ export const AuthProvider = ({children})=>{
     const [loading,setLoading] = useState(true)
     const [lockedButton,setLockedButton] = useState()
     const [shadowcontainer,setShadowContainer] = useState({
-        addList:false,
-        editList:false,
-        token:false,
-        myAccount:false,
-        editUser:false,
-        addMonitor:false,
-        editMonitor:false,
+
+            addList:false,
+            editList:false,
+            token:false,
+            myAccount:false,
+            editUser:false,
+            addMonitor:false,
+            editMonitor:false,
     
     })
 
@@ -48,6 +49,7 @@ export const AuthProvider = ({children})=>{
                 ediList:false,
                 token:false,
                 myAccount:false,
+                editUser:false,
                 addMonitor:false,
                 editMonitor:false,
             

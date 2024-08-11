@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
 import { AuthContext } from "./authcontroller";
-import { Participate_form } from "./components/participate_form";
+import { Participate_form } from "./styled_componets/participate_form";
 
 
 function AddMonitor(props){
@@ -89,7 +89,7 @@ function AddMonitor(props){
      
             </Participate_form>
 
-
+ 
         )
 
 

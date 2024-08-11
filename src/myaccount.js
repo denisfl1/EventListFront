@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { api } from "./api";
-import {My_Account} from './components/my_account'
+import {My_Account} from './styled_componets/my_account'
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";
 

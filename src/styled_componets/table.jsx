@@ -44,34 +44,12 @@ thead > tr > th {
 
 `
 
-export const Table = ({
-    th1,
-    th2,
-    th3,
-    th4,
-    th5,
-    th6,
-    th7,
-    th8,
-    lockedButton,
-    children})=>{
+export const Table = ({children})=>{
 
 return(
 
     <Table_Style >
-        <thead>
-            <tr>
-            {<th>{th1}</th>}
-            {<th>{th2}</th>}
-            {<th>{th3}</th>}
-            {<th>{th4}</th>}
-            {<th>{th5}</th>}
-            {<th hidden={!lockedButton}>{th6}</th>}
-            {<th hidden={!lockedButton}>{th7}</th>}
-            {<th hidden={!lockedButton}>{th8}</th>}
 
-            </tr>
-        </thead>
 
             {children}
 

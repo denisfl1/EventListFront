@@ -4,9 +4,9 @@ import './App.css';
 import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from './api';
-import { Shadow_container} from './components/shadow_container';
+import { Shadow_container} from './styled_componets/shadow_container';
 import { AuthContext } from './authcontroller';
-import { EventForm } from './components/Event_Form';
+import { EventForm } from './styled_componets/Event_Form';
 
 
 function List(){

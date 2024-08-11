@@ -5,7 +5,9 @@ export function Element_Shadow_Container ({className,funcao,children}){
 
     return(
         <div id={"shadow_container"} className={className} onClick={funcao}>
+
             {children}
+            
         </div>
     )
      
