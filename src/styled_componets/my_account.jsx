@@ -98,7 +98,7 @@ return(
         <input className={error.fullname && "form-input invalid"} disabled={!admin} name="name" defaultValue={name} onChange={handleChangeName}></input>
 
 
-        {error.number ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
+        {error.number || error.matchnumber ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
         <InputMask className={error.number && 'form-input invalid'} disabled={!admin} mask="(99) 99999-9999"  name="number" value={number}  onChange={handleChangeNumber}/>
 
          

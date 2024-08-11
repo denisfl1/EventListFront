@@ -20,8 +20,8 @@ function MyAccount(props){
             number:false,
             password:false,
             password1:false,
-            matchnumber:false
-        
+         
+  
             })
     
         const handleChangeName=(e)=>{
@@ -100,7 +100,7 @@ function MyAccount(props){
                     
                    if(error.response.data == "Número já existe"){
 
-                    setError({matchnumber:true})
+                   setError({number:true})
                     Swal.fire({
 
                         position: 'center',
@@ -118,7 +118,7 @@ function MyAccount(props){
                     
                          
                       })
-
+                      
 
                    }
         

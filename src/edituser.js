@@ -17,9 +17,7 @@ function EditUser(props){
 
     const [error,setError] = useState({
         fullname:false,
-        number:false,
-        matchnumber:false
-       
+        number:false,     
         })
 
     const handleChangeName=(e)=>{
