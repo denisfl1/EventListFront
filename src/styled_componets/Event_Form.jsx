@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Shadow_container } from "./shadow_container";
+import { Button } from "./button";
 
 
 const Event_Content = styled.div`
@@ -46,24 +47,7 @@ label{
 }
 
 
-button{
-  font-family: 'Poppins',sans-serif;
-  background-color:  #3085d6;
-  color: white;
-  border: none;
-  margin-top: 20px;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  font-size:14px;
-  font-weight: bold;
 
-
-&:hover{
-    background-color: #2674b9;
-    transition: background 0.2s;
-}
-}
 
 `
 
@@ -131,8 +115,10 @@ export const EventForm = ({
             />
 
             <div>
-                <button id="cancel" onClick={handleClose}>CANCELAR</button>
-                <button id="save" onClick={enviar}>ADICIONAR</button>
+
+                <Button add_list $cancel onClick={handleClose}>CANCELAR</Button>
+                <Button add_list onClick={enviar}>ADICIONAR</Button>
+         
             </div>
 
         </Event_Content>

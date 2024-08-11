@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
 import { Participate_form } from "./styled_componets/participate_form";

@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { api } from "./api";
 import Swal from "sweetalert2";
-import { Shadow_container } from "./styled_componets/shadow_container";
+import { Token_gen} from "./styled_componets/token";
 import { AuthContext } from "./authcontroller";
 
 
-function TokenGen(){
+function TokenGen(props){
 
     const [token,setToken]= useState()
     const {HandleShadow,shadowcontainer} = useContext(AuthContext)
     
-    const getToken= async()=>{
+    const genToken= async()=>{
         
     await api.get('/tokengen').then(res => {  
         if(res.status === 200){
@@ -35,21 +35,15 @@ function TokenGen(){
 
 
     return(
-
-        <Shadow_container funcao={(e)=>HandleShadow(e)}>
-
-
-        <div className={"tokengencontainer"}>
-
-            <h3>Novo Token</h3>
-
-                <input defaultValue={token ? token : ""} value={token ? token : ""}></input>
-                <div className="tokenbuttons"><button id="canceltoken" onClick={()=>shadowcontainer.token = false}>FECHAR</button><button id="genbutton" onClick={getToken}>GERAR</button></div>
-        </div>
-  
-
-        </Shadow_container>
       
+        <Token_gen  
+        
+        token={token} 
+        genToken={genToken} 
+        shadowcontainer={shadowcontainer} 
+        HandleShadow={HandleShadow}>
+
+        </Token_gen>
     )     
 
 

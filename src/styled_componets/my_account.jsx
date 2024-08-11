@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Shadow_container } from "./shadow_container";
 import InputMask from "react-input-mask";
+import {Button} from "./button"
 
 export const MyAccount_Content = styled.div`
 
@@ -57,27 +58,6 @@ select{
   color: white;
 }
 
-button{
-  margin-top:10px;
-  height: 40px;
-  border-radius: 5px;
-  width: 115px;
-  cursor: pointer;
-  color: white;
-  border: none;
-  font-size: 14px;
-  font-family: 'Poppins',sans-serif;
-  font-weight: bold;
-  background-color: rgb(43, 145, 133);
-}
-
-#cancel_button{
-  background-color:#b33131;
-}
-
-#save_button{
-  background-color: rgb(7, 139, 139);
-}
 
 #inputmatch {
 
@@ -145,7 +125,7 @@ return(
     
     }    
 
-        <div className="editbuttons"> <button onClick={handleClose} type="reset" id="cancel_button">CANCELAR</button> <button  onClick={saveSettings} id="save_button">SALVAR</button></div>
+        <div className="editbuttons"> <Button my_account $cancel onClick={handleClose} type="reset" >CANCELAR</Button> <Button my_account  onClick={saveSettings}>SALVAR</Button ></div>
 
 
         </MyAccount_Content>
