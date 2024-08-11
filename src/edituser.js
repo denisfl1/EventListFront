@@ -74,8 +74,9 @@ function EditUser(props){
         },error=>{
            
             if(error.response.status == 404){
+                setError({number:true})
                 Swal.fire({
-
+                    
                     position: 'center',
                     icon: 'error',
                     title: 'Número já Existe!',
