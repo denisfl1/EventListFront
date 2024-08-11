@@ -2,40 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
 import { AuthContext } from "./authcontroller";
-import { Shadow_container } from "./components/shadow_container";
+import { Participate_form } from "./components/participate_form";
 
 
 function AddMonitor(props){
 
     const [names,setNames] = useState()
-    const [fills1,setFills1] = useState()
-    const [ocultOption,setOcultOption] = useState(false)
-    const {shadowcontainer,HandleShadow} = useContext(AuthContext)
+    const [fills,setFills] = useState()
+    const {HandleShadow,handleClose} = useContext(AuthContext)
 
     const id = props.id
     const position = props.position
 
-    const ocult =(e)=>{
-    
-    if(e.target.value == fills1){
-        setOcultOption(true)
-    
-    }
-   
-        
-    }
-
-
 
     useEffect(()=>{
 
-    const getDATA= async (req,res)=>{
+    const getDATA= async ()=>{
         
         await api.get(`/getnamesandfillstoedit/${id}/${position}`).then(
         res=>{
             const {names,fills} = res.data
             setNames(names)
-            setFills1(fills)
+            setFills(fills)
 
             
         },error=>{
@@ -49,15 +37,14 @@ function AddMonitor(props){
     },[position])
 
 
-    const UpdateNamesandFills = async (event)=>{
+    const  addNameandFill = async ()=>{
  
-
-
         if(!names.trim()){
            return 
           }
-
-            await api.put("/updatenamesandfills",{id,position,names,fills1}).then
+    
+            console.log(id,position,names,fills)
+            await api.put("/updatenamesandfills",{id,position,names,fills}).then
             (res =>{
               
                 Swal.fire({
@@ -73,7 +60,8 @@ function AddMonitor(props){
                     
                  
                   })
-             
+                  return  handleClose()
+
               },error=>{
                 
               })
@@ -87,27 +75,21 @@ function AddMonitor(props){
    
 
         return(
-            <Shadow_container funcao={(e)=>HandleShadow(e)}>
-            
-            <form className={"editmonitor"}>
-            <label for="names">Nome
-            <input name={"names"} disabled={!props.useradmin}   type="text" onChange={(event)=> setNames(event.target.value)} defaultValue={names}></input>
-            </label>
-            <label>Serviço Aux.?</label>
 
-    
-            <select onClick = {ocult} onChange={(event)=> setFills1(event.target.value)} >
+            <Participate_form 
 
-            <option hidden={ocultOption} value={fills1} selected>{fills1}</option>
-            <option value="SIM">SIM</option>
-            <option value="-" >NÃO</option>
+            HandleShadow={HandleShadow}
+            useradmin={props.useradmin}
+            setNames={setNames}
+            names={names}
+            setFills={setFills}
+            addNameandFill={addNameandFill}
+            fills={fills}
+            handleClose={handleClose}>
+     
+            </Participate_form>
 
 
-            </select>
-            <div className="monitorsbuttons"><button type="reset" onClick={()=>shadowcontainer.editMonitor = false} id="cancelbtn">Cancelar</button><button  type="reset" onClick={UpdateNamesandFills} id="savebtn">Salvar</button></div>
-            </form>
-           
-            </Shadow_container>
         )
 
 

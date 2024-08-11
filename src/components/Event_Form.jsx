@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Shadow_container } from "./shadow_container";
 
 
 const Event_Content = styled.div`
@@ -66,20 +67,31 @@ button{
 
 `
 
-export const EventForm = ({ date, setDate, time, setTime, extrachange, setExtraChange, extratime, setExtraTime, enviar, handleCancelClick }) => {
+export const EventForm = ({
+    HandleShadow, 
+    date, 
+    setDate, 
+    time, 
+    setTime, 
+    extrachange, 
+    setExtraChange, 
+    extratime,
+    setExtraTime, 
+    enviar, 
+    handleClose }) => {
 
     const CheckOption = (event)=>{
         
         const value = JSON.parse(event.target.value)
         setExtraChange(value)
 
-        if(!value){
-            setExtraTime("-")
-        }
+        if(!value)return setExtraTime("-")
+        
 
     }
 
     return (
+        <Shadow_container funcao={(e)=>HandleShadow(e)}>
         <Event_Content>
             <h3>ADICIONE UM EVENTO</h3>
 
@@ -119,11 +131,13 @@ export const EventForm = ({ date, setDate, time, setTime, extrachange, setExtraC
             />
 
             <div>
-                <button id="cancel" onClick={handleCancelClick}>CANCELAR</button>
+                <button id="cancel" onClick={handleClose}>CANCELAR</button>
                 <button id="save" onClick={enviar}>ADICIONAR</button>
             </div>
 
         </Event_Content>
+
+        </Shadow_container>
     );
 };
 

@@ -18,6 +18,7 @@ export const AuthProvider = ({children})=>{
         editList:false,
         token:false,
         myAccount:false,
+        editUser:false,
         addMonitor:false,
         editMonitor:false,
     
@@ -32,6 +33,7 @@ export const AuthProvider = ({children})=>{
                 ediList:false,
                 token:false,
                 myAccount:false,
+                editUser:false,
                 addMonitor:false,
                 editMonitor:false,
             
@@ -39,12 +41,18 @@ export const AuthProvider = ({children})=>{
 
     }
 
-    const handleCancelClick = () => {
-        if (shadowcontainer.addList) {
-            shadowcontainer.addList = false;
-        } else {
-            shadowcontainer.editList = false;
-        }
+    const handleClose = () => {
+        setShadowContainer(
+            {
+                addList:false,
+                ediList:false,
+                token:false,
+                myAccount:false,
+                addMonitor:false,
+                editMonitor:false,
+            
+            })   
+
     };
     
   
@@ -112,10 +120,12 @@ export const AuthProvider = ({children})=>{
 
     const logout = ()=>{
         setLoading(true)
-        localStorage.removeItem("userdata")
-        localStorage.removeItem("token")
-        localStorage.removeItem("myid")
-        localStorage.removeItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+        const all = ["userdata","token","myid","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"]
+
+        all.forEach((it)=>{
+          localStorage.removeItem(it)
+        })
+
         api.defaults.headers.Authorization = null
         SOCKET.io.opts.extraHeaders = { Authorization: null }
         setUser(null)
@@ -125,10 +135,11 @@ export const AuthProvider = ({children})=>{
   }
 
 
+
 return(
     
     <AuthContext.Provider value={{authenticated:
-        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout,HandleShadow,shadowcontainer,setShadowContainer,handleCancelClick}}>
+        !!user,user,loading,setLoading,lockedButton,ID,token,setLockedButton, logged,logout,HandleShadow,shadowcontainer,setShadowContainer,handleClose}}>
             {children}   
     </AuthContext.Provider>
 

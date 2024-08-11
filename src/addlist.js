@@ -15,22 +15,11 @@ function List(){
     const [time,setTime] = useState(" ")
     const [extrachange,setExtraChange] = useState(false)
     const [extratime,setExtraTime] = useState()
-    const {HandleShadow,handleCancelClick} = useContext(AuthContext)
-
-    // const CheckOption = (e)=>{
-     
-    //     if(!JSON.parse(e.target.value)){
-    //         setExtraTime()
-    //     }
-
-    // }
-
-
+    const {HandleShadow,handleClose} = useContext(AuthContext)
 
 
     const formattedDate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     
-
     const enviar= async ()=>{
         
             
@@ -74,7 +63,7 @@ function List(){
      
       })
       
-     return handleCancelClick()
+     return handleClose()
 
     }
 
@@ -92,10 +81,10 @@ function List(){
    
 
     return(
-            <Shadow_container funcao={(e)=>HandleShadow(e)}>
 
                 <EventForm 
                 
+                HandleShadow={HandleShadow}
                 date={date}
                 setDate={setDate}
                 time={time}
@@ -105,11 +94,10 @@ function List(){
                 extratime={extratime}
                 setExtraTime={setExtraTime}
                 enviar={enviar}
-                handleCancelClick={handleCancelClick}>
+                handleClose={handleClose}>
                  
                 </EventForm>
         
-            </Shadow_container>
  
 ) 
 

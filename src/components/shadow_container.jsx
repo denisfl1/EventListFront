@@ -15,14 +15,14 @@ export function Element_Shadow_Container ({className,funcao,children}){
 
 export const Shadow_container = styled(Element_Shadow_Container)`
 
-min-width:100%;
-min-height:100vh;
-background-color: rgba(0,0,0,0.2);
-top:0;
-left:0;
-position:fixed;
-display:flex;
-z-index:1;
+    min-width:100%;
+    min-height:100vh;
+    background-color: rgba(0,0,0,0.2);
+    top:0;
+    left:0;
+    position:fixed;
+    display:flex;
+    z-index:1;
 
 
 `

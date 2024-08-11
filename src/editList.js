@@ -4,7 +4,6 @@ import './App.css';
 import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from './api';
-import { Shadow_container } from './components/shadow_container';
 import { AuthContext } from './authcontroller';
 import { EventForm } from './components/Event_Form';
 
@@ -19,7 +18,7 @@ function EditList(props){
     const [extratime,setExtraTime] = useState()
 
    
-    const{HandleShadow,handleCancelClick}= useContext(AuthContext)
+    const{HandleShadow,handleClose}= useContext(AuthContext)
     
     useEffect(() => {
         
@@ -72,7 +71,7 @@ function EditList(props){
                        
                      
                       })
-                   return handleCancelClick()
+                   return handleClose()
                 }
              
             },error=>{
@@ -85,17 +84,13 @@ function EditList(props){
        
     }
 
-        
-    
-   
 
     return(
       
-      <Shadow_container funcao={(e)=>HandleShadow(e)} >
-        
 
         <EventForm 
                 
+                HandleShadow={HandleShadow}
                 date={date}
                 setDate={setDate}
                 time={time}
@@ -104,14 +99,11 @@ function EditList(props){
                 setExtraChange={setExtraChange}
                 extratime={extratime}
                 setExtraTime={setExtraTime}
-                // CheckOption={CheckOption}
                 enviar={enviar}
-                handleCancelClick={handleCancelClick}>
+                handleClose={handleClose}>
                  
         </EventForm>
 
-
-        </Shadow_container>
  
 ) 
 

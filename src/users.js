@@ -13,16 +13,12 @@ import Swal from "sweetalert2";
     const [users,setUsers] = useState()
     const [select,setSelect] = useState([])
     const [searchUser,setSearchUser]=  useState()
-    const [container,setContainer] = useState(false)
-    const [name,setName] = useState()
-    const [number,setNumber] = useState()
-    const [password,setPassword] = useState()
-    const [admin,setAdmin] = useState()
+    const [data,setData] = useState()
     const [rotating2,setRotating2] = useState(true) 
 
     const [id,setID] = useState()
    
-    const{ID}=useContext(AuthContext)
+    const{ID,shadowcontainer}=useContext(AuthContext)
 
     useEffect(()=>{
 
@@ -102,42 +98,28 @@ import Swal from "sweetalert2";
 
     const OpenEdit=(e)=>{
     
-    if(!container){
-        setContainer(true)
+        shadowcontainer.editUser = true
+        // setContainer(true)
         setID(e.target.id)
-    }else{
-        setContainer(false)
-    }
+  
        
     }
-
-    const hide =(e)=>{
-     
-    if(e.target.className == "shadowcontainer"){
-        setContainer(false)
-    }
-
-    }
-
-   const hide1=()=>{
-
-    setContainer(false)
-
-   }
 
 
    useEffect(()=>{
 
 
-    (async(res)=>{
+    (async()=>{
 
       await api.get(`/getusertoedit/${id}`).then(
         res=>{
-           const{id,name,number,admin} = res.data
-            setName(name)
-            setNumber(number)
-            setAdmin(admin)
-            setID(id)
+            setData(res.data)
+        //    const{id,name,number,admin} = res.data
+            // setName(name)
+            // setNumber(number)
+            // setAdmin(admin)
+            // setID(id)
+            // setData
         },error=>{
 
         }
@@ -155,7 +137,7 @@ import Swal from "sweetalert2";
     
 
     return(
-        <div className="participatelist" onClick={hide}>
+        <div className="participatelist" >
 
         <div className="addheader"><h1>Usuários</h1></div>
         <div className="inputsearch"><input placeholder="Nome ou Número" onChange={(e)=>setSearchUser(e.target.value)}id="searchInput" ></input><img src={searchicon}/></div>
@@ -206,7 +188,8 @@ import Swal from "sweetalert2";
         </tbody>
 
         </table>}
-        <EditUser hide1={hide1} id={id} name={name} number={number} password={password} admin={admin} container={container}/>  
+      {shadowcontainer.editUser && data && <EditUser data={data} /> }
+
         </div>
         
     )

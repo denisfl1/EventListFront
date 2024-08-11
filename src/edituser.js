@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { api } from "./api";
-import InputMask from "react-input-mask";
 import Swal from "sweetalert2";
+import { My_Account } from "./components/my_account";
+import { useContext } from "react";
+import { AuthContext } from "./authcontroller";
 
 
 function EditUser(props){
 
-    
-
-    const [ocultOption,setOcultOption] = useState(false)
     const [name,setName] = useState()
     const [number,setNumber] = useState()
     const [admin,setAdmin] = useState()
-    const id = props.id
-   
-  
+    const [id,setID] = useState()
+    const {handleClose,HandleShadow,lockedButton} = useContext(AuthContext)
+
 
     const [error,setError] = useState({
         fullname:false,
@@ -57,25 +56,25 @@ function EditUser(props){
     
     useEffect(()=>{
    
-  
-    setName(props.name)
-    setNumber( props.number)
-    setAdmin(props.admin)
+    setName(props.data.name)
+    setNumber(props.data.number)
+    setAdmin(lockedButton)
+    setID(props.data.id)
+        
 
-    },[props.name,props.admin,props.number])
+    },[props.data])
     
-    const saveSettings= async(e)=>{
-        e.preventDefault()
+    const saveSettings= async()=>{
+
     
-    if(error.number || error.fullname || !name.trim() || !number.trim()){
-    return
-    }
+    if(error.number || error.fullname || !name.trim() || !number.trim())return
+    
     
     await api.put('/edituser',{id,name,number,admin}).then(
         res=>{
             window.location.reload()
         },error=>{
-            props.hide1()
+           
             if(error.response.status == 404){
                 Swal.fire({
 
@@ -101,55 +100,28 @@ function EditUser(props){
 
     }
 
-    const ocult =(e)=>{
-       
-        if(e.target == "true" || "false"){
-            setOcultOption(true)     
-        
-        }
-       
-            
-        }
-
-    const close=()=>{
-    setError(
-        {fullname:false,number:false}
-    )
-
-    props.hide1()
-
-    }
 
     return(
 
-    <div className={!props.container ? "shadowcontainer-hide" : "shadowcontainer"}>
 
-    <form className={props.container ? "EditUser" : "EditUser-hide"}>
-        <h3>ALTERAR DADOS</h3>
-
-        {error.fullname ? <label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
-        <input className={error.fullname && "form-input invalid" } disabled={!props.name} name="name" defaultValue={name} value={name} onChange={handleChangeName}></input>
+        <My_Account 
         
+        id={id} 
+        name={name} 
+        number={number} 
+        admin={admin}
+        setAdmin={setAdmin}
+        handleChangeNumber={handleChangeNumber}
+        handleChangeName={ handleChangeName}
+        saveSettings={saveSettings}
+        editUser={true}
+        error={error}
+        handleClose={ handleClose}
+        HandleShadow={HandleShadow}
+    
+        ></My_Account >
 
-        {error.number ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
-        <InputMask className={error.number &&'form-input invalid'}  mask="(99) 99999-9999" id="telefone" name="number"  defaultValue={number}  value={number} onChange={handleChangeNumber}/>
-       
-        
-        <label for="admin">Administrador </label>
-        <select disabled={props.admin == null} onClick={ocult} onChange={(e)=>(setAdmin(e.target.value))}  type="select" name="admin">
-        
-        <option hidden={ocultOption} selected={props.admin} defaultValue={props.admin} value={props.admin}>{props.admin ? "SIM" : "NÃO"}</option>
-        <option value={true}>SIM</option>
-        <option value={false}>NÃO</option>
 
-        </select>
-       
-       <div className="editbuttons"> <button type="reset" onClick={close} id="canceledituser">Cancelar</button> <button  onClick={saveSettings} id="saveedituser">Salvar</button></div>
-
-
-    </form>
-
-    </div>
 )
 
 

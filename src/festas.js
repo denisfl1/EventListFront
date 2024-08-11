@@ -13,30 +13,27 @@ import { api } from './api';
 import { AuthContext } from './authcontroller';
 import { SOCKET} from './api';
 import {RotatingLines} from 'react-loader-spinner'
+import { Table } from './components/table';
+import { Table_Container } from './components/container';
 
 
 
 
 function Feslist(props){
    
-
-    const [show,setShowModal] = useState()
-    const [show1,setShowModal1] = useState()
     const [festlist,setFestList] = useState()
     const [editId,setEditId] = useState()
     const [rotating,setRotating] = useState(true)
    
 
-    const {lockedButton,shadowcontainer,setShadowContainer} = useContext(AuthContext)
+    const {lockedButton,shadowcontainer} = useContext(AuthContext)
   
 
     const participate = (event) =>{
     
-    
         const id = event.target.id
         setEditId(id)
        
-
     }
 
    
@@ -70,10 +67,8 @@ function Feslist(props){
 
     const delEvent  = async (e)=>{
 
-
         const id = e.target.id
-
-        
+     
         await api.delete(`/delete/${id}`).then(
             res=>{
               
@@ -129,8 +124,7 @@ function Feslist(props){
             
             })
     
-     
-            
+             
             // SOCKET.on('initialListError',(error)=>{
                 
             // return SOCKET.disconnect()
@@ -155,11 +149,8 @@ function Feslist(props){
 
     return(
       
-        
-       
     
-   
-    <div className={'festcontainer'}>
+    <Table_Container event_list>
       
       
         <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>shadowcontainer.addList = true}>Novo Evento</button></div>
@@ -173,35 +164,20 @@ function Feslist(props){
             </div>}
               
         {!rotating && festlist.length > 0 &&
-        <table className='table '>
-                
-                <thead >
-                
-                    <tr >
-                        <th> #ID </th>
-    
-                        <th> Data </th>
-    
-                        <th>Horário</th>
-    
-                        <th> Hora Extra</th>
-    
-                        <th>Participar</th>
 
-                        <th hidden={!lockedButton}>OFF/ON</th>
+        <Table 
+        th1={'#ID'} 
+        th2={'Data'}
+        th3={'Horário'} 
+        th4={'Hora Extra'} 
+        th5={'Participar'} 
+        th6={'OFF/ON'} 
+        th7={'Editar'}
+        th8={'Excluir'}
+        lockedButton={lockedButton} >
+     
+             <tbody> 
 
-                        <th hidden={!lockedButton}>Editar</th>
-
-                        <th hidden={!lockedButton}>Excluir</th>
-    
-                    </tr>
-    
-                </thead>
-                <tbody> 
-
-              
-                
-                
               {typeof festlist !== "undefined" && festlist.map((value,index)=>{
               return  <tr key={index + 1} > 
               <td>{index + 1 }</td>
@@ -223,11 +199,8 @@ function Feslist(props){
     
      
                 </tbody> 
-                
-    
-        
-              
-            </table>}  
+                       
+            </Table>}  
 
            
 
@@ -236,7 +209,7 @@ function Feslist(props){
             
       
         
-      </div>
+      </Table_Container>
       
     )
 

@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { api } from "./api";
-import InputMask from "react-input-mask";
+import {My_Account} from './components/my_account'
 import Swal from "sweetalert2";
-import { Shadow_container } from "./components/shadow_container";
 import { AuthContext } from "./authcontroller";
 
 
@@ -14,7 +13,7 @@ function MyAccount(props){
     const [password1,setPassword1] = useState()
     const [admin,setAdmin] = useState(props.admin)
     const [id,setID] = useState(props.id)
-    const {HandleShadow,shadowcontainer} = useContext(AuthContext)
+    const {handleClose,HandleShadow} = useContext(AuthContext)
 
         const [error,setError] = useState({
             fullname:false,
@@ -135,31 +134,28 @@ function MyAccount(props){
 
     return(
 
-        <Shadow_container funcao={(e)=>HandleShadow(e)}>
-    
-        <div id={"EditMyUser"}  className={"EditUser"}>
-            <h3>DADOS PESSOAIS</h3>
-    
-            {error.fullname ?<label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
-            <input className={error.fullname && "form-input invalid"} disabled={!admin} name="name" defaultValue={name} onChange={handleChangeName}></input>
-            
 
-            {error.number ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
-            <InputMask className={error.number && 'form-input invalid'} disabled={!admin} mask="(99) 99999-9999"  name="number" defaultValue={number}  onChange={handleChangeNumber}/>
-    
-            {error.password ?<label id="inputmatch" for="password">Mínimo 5 caracteres</label> :<label for="password">Nova Senha</label>}
-            <input className={error.password && "form-input invalid"}  type="password"  name="password" onChange={handleChangePassword}></input>
-            
-           
-            {error.password1 ? <label  id="inputmatch" for="password1">Senhas Diferentes</label>:<label for="password1">Confirme a Senha</label>}
-            <input className={error.password1 && "form-input invalid"} type="password"  name="password1"  onChange={handleChangePassword1} ></input>
-           
-           <div className="editbuttons"> <button onClick={()=>shadowcontainer.Myaccount = false} type="reset" id="canceledituser">CANCELAR</button> <button  onClick={saveSettings} id="saveedituser">SALVAR</button></div>
-    
-    
-        </div>
-    
-        </Shadow_container>
+        <My_Account
+        
+        error={error}
+        admin={admin}
+        name={name}
+        handleChangeName={handleChangeName}
+        handleChangeNumber={handleChangeNumber}
+        number={  number}
+        handleChangePassword={handleChangePassword}
+        handleChangePassword1={handleChangePassword1}
+        saveSettings={saveSettings}
+        handleClose={handleClose}
+        HandleShadow={HandleShadow}
+        editUser={false}
+        
+        >
+             
+
+        </My_Account>
+
+      
     )
 
 

@@ -1,25 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "./api";
-import { Shadow_container } from "./components/shadow_container";
+import { Participate_form } from "./components/participate_form";
 import { AuthContext } from "./authcontroller";
 
 
 function AddMonitor(props){
 
-    const [names,setNames] = useState()
+    const [names,setNames] = useState(props.username)
     const [fills,setFills] = useState(" - ")
-    const {HandleShadow,shadowcontainer} = useContext(AuthContext)
+    const {HandleShadow,handleClose} = useContext(AuthContext)
  
 
     const id = props.id
 
-    const addNameandFill = async (event)=>{
-        event.preventDefault()
-
+    const addNameandFill = async ()=>{
+ 
 
         if(!names.trim())return
-
     
       api.post("/addnameandfill", { id, names, fills })
           .then((res) => {
@@ -35,10 +33,11 @@ function AddMonitor(props){
                   });
 
 
-                  return shadowcontainer.addMonitor = false
+                  return handleClose()
               }
           })
-          .catch((error) => {  // Aqui está a correção
+          .catch((error) => {  
+
               Swal.fire({
                   position: 'center',
                   icon: 'error',
@@ -56,31 +55,18 @@ function AddMonitor(props){
         
     }
 
-      useEffect(()=>{
-
-        setNames(props.username)
-
-      },[props.username])
- 
 
         return(
-            <Shadow_container funcao={(e)=>HandleShadow(e)}>
-            
-            <div className={"addmonitor"}>
-            <label for="names">Nome
-            <input disabled={!props.useradmin} name={"names"}  type="text" onChange={(event)=> setNames(event.target.value)} value={names} ></input>
-            </label>
-            <label>Serviço Aux.?</label>
-            <select  name={"fills"}  onChange={(event)=> setFills(event.target.value)} value={fills}>
-            <option value=" - ">-</option>
-            <option value=" - ">NÃO</option>
-            <option value="SIM">SIM</option>
-            
-            </select>
-            <div className="monitorsbuttons"><button type="reset" onClick={()=>shadowcontainer.addMonitor = false} id="cancelbtn">Cancelar</button><button onClick={addNameandFill} type="reset" id="savebtn">Salvar</button></div>
-            </div>
-           
-            </Shadow_container>
+          <Participate_form 
+          HandleShadow={HandleShadow}
+          useradmin={props.useradmin}
+          setNames={setNames}
+          names={names}
+          setFills={setFills}
+          addNameandFill={addNameandFill}
+          fills={fills}
+          handleClose={handleClose}>
+          </Participate_form>
         )
 
 

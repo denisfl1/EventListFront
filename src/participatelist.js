@@ -8,11 +8,11 @@ import { api,SOCKET} from "./api";
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";
 import { RotatingLines } from "react-loader-spinner";
-import { Shadow_container } from "./components/shadow_container";
+import { Table } from "./components/table";
+import {Table_Container} from "./components/container"
 
 
-
-function Participate(props){
+function Participate(){
 
     const {id} = useParams()
     const [alldata,setallData] = useState()
@@ -32,7 +32,7 @@ function Participate(props){
 
     const getID =(event)=>{
 
-        shadowcontainer.addMonitor = true
+        shadowcontainer.editMonitor = true
         setPosition(event.target.id)
         
 
@@ -146,41 +146,31 @@ function Participate(props){
 
 
     return(
-    <div className="participatelist ">
+    <Table_Container participate>
     
     <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={()=>shadowcontainer.addMonitor = true}>Participar</button></div>
     
 
-    {rotating1 ?<div className='loading'>
-          <RotatingLines   strokeColor="grey"
+    {rotating1 ?
+    
+        <div className='loading'>
+          <RotatingLines  strokeColor="grey"
           strokeWidth="5"
           animationDuration="0.75"
           width="50"
           visible={true} />
-            </div>:
+        </div> :
 
-    <table className='table '>
-                
-            
-    <thead >
-    
-        <tr >
-            <th> #ID </th>
-
-            <th> Nome </th>
-
-            <th>Serviço Auxiliar</th>
-
-            <th>Editar</th>
-
-            <th>Excluir</th>
-
-        </tr>
-
-    </thead>
+        <Table
+        th1={'#ID'}
+        th2={'Nome'}
+        th3={'Serviço Auxiliar'}
+        th4={'Editar'}
+        th5={'Excluir'}>
+      
+        
     <tbody className={id}>
 
-  
         {typeof alldata !== "undefined" && alldata.map((value,index)=>{
             return (
                 <>
@@ -200,16 +190,13 @@ function Participate(props){
         })} 
 
     
-        
-
-
     </tbody>
 
-    </table>}
+    </Table>}
 
-        {shadowcontainer.addMonitor && <AddMonitor id={id} userid={userid} username={username} useradmin={useradmin}></AddMonitor>}
+        {shadowcontainer.addMonitor && <AddMonitor  id={id} userid={userid} username={username} useradmin={useradmin}></AddMonitor>}
         {shadowcontainer.editMonitor && <EditMonitor id={id}  useradmin={useradmin} position={position} ></EditMonitor>}
-    </div>)
+    </Table_Container>)
 
 
 }

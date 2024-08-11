@@ -5,7 +5,7 @@ import { Shadow_container } from "./components/shadow_container";
 import { AuthContext } from "./authcontroller";
 
 
-function TokenGen(props){
+function TokenGen(){
 
     const [token,setToken]= useState()
     const {HandleShadow,shadowcontainer} = useContext(AuthContext)
@@ -29,10 +29,7 @@ function TokenGen(props){
             .catch(error => {
                 shadowcontainer.token = false    
             })
-            .finally(() => {
             
-            });
-    
 
     }
 

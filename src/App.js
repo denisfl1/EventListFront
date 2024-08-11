@@ -10,7 +10,7 @@ import Participate from './participatelist';
 import Users from './users'
 import { AuthContext, AuthProvider } from './authcontroller';
 import { useContext, useState } from 'react';
-import Footer from './footer';
+import Footer from './components/footer';
 import {RotatingLines} from 'react-loader-spinner'
 
 
@@ -65,7 +65,7 @@ function App() {
     
  
   return (
-    <div className='Appcontainer'>
+  
   
     <BrowserRouter>
     <AuthProvider>
@@ -87,10 +87,6 @@ function App() {
     </AuthProvider>
     </BrowserRouter> 
  
-
-  
- 
-   </div>
    
   );
 }

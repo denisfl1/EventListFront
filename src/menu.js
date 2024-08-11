@@ -6,7 +6,7 @@ import Myaccount from './myaccount'
 import {api} from './api'
 import TokenGen from "./tokengen"
 
-function Menu(props){
+function Menu(){
 
     const {authenticated,logout} = useContext(AuthContext)
     const [click,setClick] = useState(false)
@@ -20,25 +20,23 @@ function Menu(props){
   
     const authbutton=()=>{
     
-        if(authenticated){
-            return logout()
-        }
+        if(authenticated) return logout()
+       
 
     }
 
     const open=()=>{
     
-        if(!click){
-            setClick(true)
-        return
-        }setClick(false)    
+        if(!click)return setClick(true)
+    
+        return setClick(false)    
     }
 
 
     useEffect(()=>{
 
 
-        (async(res)=>{
+        (async()=>{
             
         if(authenticated &&!loading){
             
