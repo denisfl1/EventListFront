@@ -9,7 +9,7 @@ import 'typeface-poppins';
 import Participate from './participatelist';
 import Users from './users'
 import { AuthContext, AuthProvider } from './authcontroller';
-import { useContext, useState } from 'react';
+import {useContext} from 'react';
 import Footer from './styled_componets/footer';
 import {RotatingLines} from 'react-loader-spinner'
 

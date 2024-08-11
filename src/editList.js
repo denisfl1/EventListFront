@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from './api';
 import { AuthContext } from './authcontroller';
-import { EventForm } from './styled_componets/Event_Form';
+import { EventForm } from  './styled_componets/Event_Form';
 
 
 function EditList(props){

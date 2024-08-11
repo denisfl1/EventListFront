@@ -172,7 +172,7 @@ function Feslist(props){
                 <th>Data</th>
                 <th>Horário</th>
                 <th>Hora Extra</th>
-                <th hidden={!lockedButton}>Participar</th>
+                <th>Participar</th>
                 <th hidden={!lockedButton}>OFF/ON</th>
                 <th hidden={!lockedButton}>Editar</th>
                 <th hidden={!lockedButton}>Excluir</th>

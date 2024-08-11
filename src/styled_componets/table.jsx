@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-const Table_Style = styled.table`
+export const Table  = styled.table`
 
   text-align: center;
   width: 100%;
@@ -43,17 +43,3 @@ thead > tr > th {
 
 
 `
-
-export const Table = ({children})=>{
-
-return(
-
-    <Table_Style >
-
-
-            {children}
-
-
-    </Table_Style>
-)
-}
