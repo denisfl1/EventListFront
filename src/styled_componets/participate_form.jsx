@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Shadow_container } from "./shadow_container";
+import { Button } from "./button";
 
 
  const Participate_content = styled.div`
@@ -87,7 +88,7 @@ return(
     <option  value="SIM">SIM</option>
     
     </select>
-    <div className="monitorsbuttons"><button type="reset" onClick={handleClose} id="cancelbtn">Cancelar</button><button onClick={addNameandFill} type="reset" id="savebtn">Salvar</button></div>
+    <div className="monitorsbuttons"><Button type="reset" onClick={handleClose} add_monitor $cancel>Cancelar</Button><Button onClick={addNameandFill} type="reset" add_monitor>Salvar</Button></div>
    
     </ Participate_content>
     </Shadow_container>

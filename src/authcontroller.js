@@ -1,11 +1,7 @@
 import React,{useState,createContext,useEffect} from 'react'
-import { Link } from 'react-router-dom';
 import { api, SOCKET } from './api';
 
-
-
 export const AuthContext = createContext();
-
 
 export const AuthProvider = ({children})=>{
 

@@ -9,6 +9,7 @@ import searchicon from './logos/lupa.png'
 import Swal from "sweetalert2";
 import { Table_Container } from "./styled_componets/container";
 import { Table } from "./styled_componets/table";
+import { Button } from "./styled_componets/button";
 
  function AllUsers(){
 
@@ -170,7 +171,7 @@ import { Table } from "./styled_componets/table";
 
             <th>Alterar</th>
 
-            <th><form><button id="deleteuser" disabled={select == 0}  type="submit" onClick={excluir}>EXCLUIR</button></form></th>
+            <th><form><Button delete_users disabled={select == 0}  type="submit" onClick={excluir}>EXCLUIR</Button></form></th>
   
             </tr>
 

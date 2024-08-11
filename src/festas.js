@@ -15,6 +15,7 @@ import { SOCKET} from './api';
 import {RotatingLines} from 'react-loader-spinner'
 import { Table } from  './styled_componets/table';
 import { Table_Container } from './styled_componets/container';
+import { Button } from './styled_componets/button';
 
 
 function Feslist(props){
@@ -151,7 +152,10 @@ function Feslist(props){
     <Table_Container event_list>
       
       
-        <div className='addheader'><h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1><button hidden={!lockedButton} onClick={()=>shadowcontainer.addList = true}>Novo Evento</button></div>
+        <div className='addheader'>
+            <h1>{typeof festlist != "undefined" && festlist.length == 0 && !rotating ? "Não há festas Disponíveis" :"Eventos Disponíveis"  }</h1>
+            <Button add_event hidden={!lockedButton} onClick={()=>shadowcontainer.addList = true}>Novo Evento</Button>
+        </div>
         
         {rotating && <div className='loading'>
           <RotatingLines   strokeColor="grey"

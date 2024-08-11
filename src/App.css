@@ -134,29 +134,6 @@ body {
 
 }
 
-.addheader button{
-  height: 50px;
-  width: 150px;
-  border-radius: 5px;
-  border:none;
-  background-color: #2989de;
-  color: #ffffff;
-  font-size:medium;
-  cursor: pointer;
-  font-weight: bolder;
-  font-family: 'Poppins',sans-serif;
-  
-}
-
-.addheader button:hover{
-  background-color: #2674b9
-
-}
-
-.addheader button:disabled{
-  color:white;
-  background-color: rgb(148, 148, 148);
-}
 
 
 .icon{
@@ -346,56 +323,9 @@ a{
 }
 
 
-#save{
-  background-color: #0e78d4;
-  width: 115px;
-}
-#save:hover{
-  background-color: #075293;
-}
-
-
-#cancel{
-  background-color: #c21313;
-  margin-right: 15px;
-  width: 110px;
-}
-
-
-
-#cancel:hover{
-  background-color: #8c2929;
-}
-
-
-
-
 .festcontainer{
   padding-bottom: 2rem;
 }
-
-
-
-#cancelbtn{
-  background-color: #b33131;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  height: 35px;
-  width: 100px;
-
-}
-
-#savebtn{
-  background-color: #065092;
-  height: 35px;
-  margin-left: 5px;
-  color: white;
-  width: 100px;
-  border:none;
-  border-radius: 5px;
-}
-
 
 .logincontainer{
   min-height: 75vh;
@@ -413,29 +343,6 @@ a{
   margin: 0;
 
 }
-
-
-#deleteuser:enabled{
-  background-color: rgb(178, 68, 79);
-  color:white;
-  border: none;
-  padding: 5px;
-  width: 90px;
-  border-radius: 2px;
-  font-weight: bold ;
-}
-
-#deleteuser:disabled{
-  font-weight: bold ;
-  background-color: #adb2b7;
-  padding: 5px;
-  width: 90px;
-  border-radius: 2px;
-  border: none;
-}
-
-
-
 
 
 .inputsearch{
@@ -472,60 +379,3 @@ a{
 }
 
 
-/* .tokengencontainer{
-  color: white;
-  background-color: #3a3f3e;
-  width: 300px;
-  height: 180px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items:center;
-  margin: auto;
-  font-family: 'Poppins',sans-serif;
-  border-radius: 5px  ;
-  box-shadow:  0px 0px 10px 6px #0000007d;
-  text-align: center;
-
-}
-
-.tokengencontainer input{
-  width: 70%;
-  height: 35px;
-  text-align: center;
-  font-size: 25px;
-  background-color:  #5d3f6c;
-  color: white;
-  border: none;
-}
-
-.tokengencontainer input:focus-visible {
-  outline: none;
- }
-
-
-.tokengencontainer button{
-  
-  height: 35px;
-  margin-top: 15px;
-  border-radius: 5px;
-  background-color: rgb(43, 145, 133);
-  color: white;
-  border: none;
-  font-weight: bold;
-  font-size: 15px;
-  font-family: 'Poppins',sans-serif;
-  display: inline;
-  cursor: pointer;
-  
-}
-
-#canceltoken{
-  background-color:#b33131;
-  width: 100px;
-}
-
-#genbutton{
-  width: 100px;
-  margin-left: 8px;
-} */

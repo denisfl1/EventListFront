@@ -10,6 +10,7 @@ import { AuthContext } from "./authcontroller";
 import { RotatingLines } from "react-loader-spinner";
 import { Table } from "./styled_componets/table";
 import {Table_Container} from "./styled_componets/container"
+import { Button } from "./styled_componets/button";
 
 
 function Participate(){
@@ -148,7 +149,7 @@ function Participate(){
     return(
     <Table_Container participate>
     
-    <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<button disabled={!btn && !lockedButton}  onClick={()=>shadowcontainer.addMonitor = true}>Participar</button></div>
+    <div className="addheader"><h1>Funcionários</h1>{typeof alldata != "undefined" && alldata[0] && !rotating1 &&<h2>Evento: {date} - {time} {extratime !== " - " ? " + " + extratime  + " Extra " : " "} </h2>}<Button add_event disabled={!btn && !lockedButton}  onClick={()=>shadowcontainer.addMonitor = true}>Participar</Button></div>
     
 
     {rotating1 ?
