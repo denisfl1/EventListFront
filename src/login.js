@@ -6,6 +6,7 @@ import { AuthContext } from "./authcontroller";
 import { api } from "./api";
 import img1 from './logos/wallpapperlorem.jpg'
 import InputMask from "react-input-mask";
+import './App.css';
 
 
 

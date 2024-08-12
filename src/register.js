@@ -33,7 +33,7 @@ import img1 from './logos/wallpapperlorem.jpg'
     const handleChangeName=(event)=>{
         const values = event.target.value
         const explodeString = values.split(" ")
-        const filter = explodeString.filter((x)=>{return x !== ''})
+        const filter = explodeString.filter((data)=>{return data !== ''})
      
     setName(values)
         
@@ -95,7 +95,7 @@ import img1 from './logos/wallpapperlorem.jpg'
         if(values){
          ERROR.token = false 
          numberCheck.empty = false
-         
+
         }
     }
 

@@ -1,4 +1,5 @@
 import React, {useEffect,useContext} from "react";
+import './App.css';
 import { useState } from "react";
 import { api } from "./api";
 import edit from './logos/edit.png'
@@ -117,12 +118,7 @@ import { Button } from "./styled_componets/button";
       await api.get(`/getusertoedit/${id}`).then(
         res=>{
             setData(res.data)
-        //    const{id,name,number,admin} = res.data
-            // setName(name)
-            // setNumber(number)
-            // setAdmin(admin)
-            // setID(id)
-            // setData
+   
         },error=>{
 
         }

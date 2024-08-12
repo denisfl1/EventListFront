@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
-import './App.css';
 import Swal from 'sweetalert2';
 import moment from 'moment-timezone'
 import { api } from '../api';
