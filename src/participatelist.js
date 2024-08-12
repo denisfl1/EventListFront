@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import edit from './logos/edit.png'
 import del from './logos/delete.png'
 import { useParams } from "react-router-dom";
-import AddMonitor from "./addmonitor";
-import EditMonitor from "./editmonitor"
+import AddMonitor from "./components/addmonitor";
+import EditMonitor from "./components/editmonitor"
 import { api,SOCKET} from "./api";
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";

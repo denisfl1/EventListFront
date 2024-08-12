@@ -2,12 +2,12 @@ import React, { useContext, useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react';
 import './App.css';
-import Addlist from './addlist'
+import Addlist from './components/addlist'
 import icon from './logos/redimensionar.png'
 import edit from './logos/edit.png'
 import del from './logos/delete.png'
 import Swal from 'sweetalert2';
-import EditList from './editList';
+import EditList from './components/editList';
 import { Link } from 'react-router-dom';
 import { api } from './api';
 import { AuthContext } from './authcontroller';

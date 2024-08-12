@@ -3,7 +3,7 @@ import { useState } from "react";
 import { api } from "./api";
 import edit from './logos/edit.png'
 import { AuthContext } from "./authcontroller";
-import EditUser from "./edituser";
+import EditUser from "./components/edituser";
 import { RotatingLines } from "react-loader-spinner";
 import searchicon from './logos/lupa.png'
 import Swal from "sweetalert2";

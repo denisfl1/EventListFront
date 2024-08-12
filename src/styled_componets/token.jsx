@@ -50,8 +50,8 @@ return(
     <h3>Novo Token</h3>
 
     <input defaultValue={token ? token : ""} value={token ? token : ""}></input>
-    {/* <div className="tokenbuttons"><button id="canceltoken" onClick={()=>shadowcontainer.token = false}>FECHAR</button><button id="genbutton" onClick={getToken}>GERAR</button></div> */}
-    <div >
+
+    <div>
 
      <Button token $cancel onClick={()=>shadowcontainer.token = false}>FECHAR</Button>
      <Button token  onClick={genToken}>GERAR</Button>

@@ -4,7 +4,7 @@ import { AuthContext } from "./authcontroller"
 import home from './logos/home.png'
 import Myaccount from './myaccount'
 import {api} from './api'
-import TokenGen from "./tokengen"
+import TokenGen from "./components/tokengen"
 
 function Menu(){
 

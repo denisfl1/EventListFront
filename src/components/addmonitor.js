@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
-import { api } from "./api";
-import { Participate_form } from "./styled_componets/participate_form";
-import { AuthContext } from "./authcontroller";
+import { api } from "../api";
+import { Participate_form } from "../styled_componets/participate_form";
+import { AuthContext } from "../authcontroller";
 
 
 function AddMonitor(props){

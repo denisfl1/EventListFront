@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { api } from "./api";
+import { api } from "../api";
 import Swal from "sweetalert2";
-import { My_Account } from "./styled_componets/my_account";
+import { My_Account } from "../styled_componets/my_account";
 import { useContext } from "react";
-import { AuthContext } from "./authcontroller";
+import { AuthContext } from "../authcontroller";
 
 
 function EditUser(props){

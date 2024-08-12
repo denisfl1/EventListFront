@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { api } from "./api";
+import { api } from "../api";
 import Swal from "sweetalert2";
-import { Token_gen} from "./styled_componets/token";
-import { AuthContext } from "./authcontroller";
+import { Token_gen} from "../styled_componets/token";
+import { AuthContext } from "../authcontroller";
 
 
 function TokenGen(props){
