@@ -3,7 +3,7 @@ import { api } from "../api";
 import Swal from "sweetalert2";
 import { My_Account } from "../styled_componets/my_account";
 import { useContext } from "react";
-import { AuthContext } from "../authcontroller";
+import { AuthContext } from '../authcontroller';
 
 
 function EditUser(props){
@@ -56,7 +56,7 @@ function EditUser(props){
    
     setName(props.data.name)
     setNumber(props.data.number)
-    setAdmin(lockedButton)
+    setAdmin(props.data.admin)
     setID(props.data.id)
         
 
@@ -117,6 +117,7 @@ function EditUser(props){
         error={error}
         handleClose={ handleClose}
         HandleShadow={HandleShadow}
+        lockedButton={lockedButton}
     
         ></My_Account >
 

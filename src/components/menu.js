@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { AuthContext } from "./authcontroller"
-import home from './logos/home.png'
-import Myaccount from './myaccount'
-import {api} from './api'
-import TokenGen from "./components/tokengen"
+import { AuthContext } from "../authcontroller"
+import home from '../logos/home.png'
+import Myaccount from '../myaccount'
+import {api} from '../api'
+import TokenGen from "./tokengen"
 
 function Menu(){
 

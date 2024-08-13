@@ -6,6 +6,9 @@ import { api } from "./api";
 import { Navigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import img1 from './logos/wallpapperlorem.jpg'
+import { Button } from "./styled_componets/button";
+import {Table_Container} from './styled_componets/container'
+import { Login_form } from "./styled_componets/login";
 
 
     function Register(){
@@ -120,10 +123,10 @@ import img1 from './logos/wallpapperlorem.jpg'
                         return <Navigate to="/login"/>
                     }        
                 },error=>{ 
-                    
-                    if(error.response.data === "Token Inválido")return ERROR.token = true
+                    console.log(error.response.data)
+                    if(error.response.data === "Token Inválido")return setError({token:true} ) 
 
-                    if(error.response.data === "Número já existe") return numberCheck.login = true 
+                    if(error.response.data === "Número já existe")return setNumberCheck({login:true})
                    
 
                 }
@@ -136,49 +139,30 @@ import img1 from './logos/wallpapperlorem.jpg'
     
 
     return(
-        <div className="logincontainer">
+
+        <Table_Container>
+
+        < Login_form
+        
+                handleChangeName={handleChangeName}
+                handleChangeNumber = {handleChangeNumber}
+                handleChangeToken={handleChangeToken}
+                numberCheck = {numberCheck}
+                loginlock = {loginlock}
+                error = {ERROR}
+                handleSubmit = {handleSubmit}
+                handleChangePassword = {handleChangePassword}
+                register={true}>
+
+        </Login_form>
+
+    
+        </Table_Container>
+
+        
    
-           <img className="elementor-video" src={img1}></img>
-        <div id="login-register" className="login" >
-            
-            <img className="spasso-picture" src={img} ></img>
-            <form className="login-form"  >
-            
-            
-            <input className={ERROR.fullname || numberCheck.empty ? 'form-input invalid' : 'form-input' } 
-            name={"name"} onChange={handleChangeName}
-            placeholder="Nome e Sobrenome" ></input>
-            <label className="labelerror">{numberCheck.empty ? "" : ERROR.fullname ? "Nome Inválido *":" " }  
-            </label>
-             
-            
-             <InputMask className={ERROR.number|| numberCheck.login || numberCheck.empty ? 'form-input invalid' : 'form-input '} mask="(99) 99999-9999" id="telefone" name="telefone" placeholder="Número de Celular" onChange={handleChangeNumber}/>
-             <label className="labelerror">{numberCheck.login || numberCheck.empty ? "" :ERROR.number ? "Número Inválido *" : "  "} 
-             {numberCheck.login ? "Número Já Cadastrado *" : "  "  } 
-             </label>
-            
-            
-            <input className={ERROR.password|| numberCheck.empty ? 'form-input invalid' : 'form-input'} 
-            name={"password"} onChange={handleChangePassword}  type="password"
-             placeholder="Digite sua Senha" ></input>
-              <label className="labelerror">{numberCheck.empty ? "" : ERROR.password ? "Mínimo 5 Caracteres *":" "}
-              </label>
-
-              
-             
-              <input  className={ERROR.token || numberCheck.empty ? 'form-input invalid' :'form-input'} name={"token"} onChange={handleChangeToken} placeholder="Token de Autenticação"></input>
-              <label  className="labelerror">{ERROR.token ? "Token Inválido *":" "} {numberCheck.empty ?"Campos Obrigatórios *" : " "} </label>
-              
-
-            
-            <button disabled={loginlock} type="submit" onClick={handleSubmit}>Cadastrar</button>
-            </form>
-           
-           
-        </div>
-        </div>
+    
     )
-
 
 }
 

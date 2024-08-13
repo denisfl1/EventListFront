@@ -1,7 +1,7 @@
 import React, {useEffect,useContext} from "react";
 import './App.css';
 import { useState } from "react";
-import { api } from "./api";
+import { api } from "./api"
 import edit from './logos/edit.png'
 import { AuthContext } from "./authcontroller";
 import EditUser from "./components/edituser";

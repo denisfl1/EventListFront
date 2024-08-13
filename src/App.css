@@ -211,77 +211,7 @@ body {
   z-index: -1;
 }
 
-#login-register{
- padding: 65px;
- margin-top: 60px;
-}
 
-.login{
-  margin: auto;
-  margin-top: 100px;
-  padding: 90px;
-  width: 250px;
-  background-color: #3e3e3ef8;
-  text-align: center;
-  border-radius:10px;
-  position: relative;
-  
-}
-
-.login button{
-  background-color: #137e7e9c;
-  color: rgb(177, 177, 177);
-  font-weight:bolder;
-  font-family:'Poppins';
-}
-
-.login button:disabled{
-  background-color: grey;
-  color: rgb(255, 255, 255);
-  font-weight:bolder;
-  font-family:'Poppins';
-}
-
-.login input{
-  background-color: #5d3f6c;
-  font-size: 15px;
-
-}
-
-.login input :focus{
-  background-color: #5d3f6c;
-  color:white
-}
-
-
-.login  input::placeholder{
-  color:rgb(200, 200, 200)
-}
-
-.login-form input{
-  outline: none;
-  padding: 15px;
-  width: 200px;
-  margin: auto;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  border: none;
-  color:rgb(227, 227, 227)
-
- 
-}
-
-.labelerror{
-  color: #e63636;
-  font-size: 12px;
-}
-
-.errorEmail{
-  color: #e63636;
- 
-}
 
 .login-form button{
   border: none;
@@ -292,19 +222,6 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 
-}
-
-
-.registerclass{
-  margin-left: 7px;
- 
-}
-
-
-
-.form-input.invalid {
-  
-  border: 3px solid #e63636
 }
 
 
@@ -327,9 +244,7 @@ a{
   padding-bottom: 2rem;
 }
 
-.logincontainer{
-  min-height: 75vh;
-}
+
 
 .loading{
   min-height: 100vh;

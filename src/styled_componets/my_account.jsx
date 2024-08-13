@@ -82,7 +82,8 @@ export const My_Account = ({
     handleClose,
     HandleShadow,
     setAdmin,
-    editUser
+    editUser,
+    lockedButton
 
 })=>{
 
@@ -95,17 +96,17 @@ return(
         <h3>DADOS PESSOAIS</h3>
     
         {error.fullname ?<label id="inputmatch" for="name">Nome Inválido</label>:<label for="name">Nome de Usuário</label>}
-        <input className={error.fullname && "form-input invalid"} disabled={!admin} name="name" defaultValue={name} onChange={handleChangeName}></input>
+        <input className={error.fullname && "form-input invalid"} disabled={!lockedButton} name="name" defaultValue={name} onChange={handleChangeName}></input>
 
 
         {error.number || error.matchnumber ? <label id="inputmatch" for="number">Número Inválido</label>:<label for="number">Número Atual</label>}
-        <InputMask className={error.number && 'form-input invalid'} disabled={!admin} mask="(99) 99999-9999"  name="number" value={number}  onChange={handleChangeNumber}/>
+        <InputMask className={error.number && 'form-input invalid'} disabled={!lockedButton} mask="(99) 99999-9999"  name="number" value={number}  onChange={handleChangeNumber}/>
 
          
         {editUser ? 
             <>
         <label for="admin">Administrador </label>
-        <select disabled={admin == null} onChange={(e)=>(setAdmin(JSON.parse(e.target.value)))} value={admin}  type="select" name="admin">
+        <select  onChange={(e)=>(setAdmin(JSON.parse(e.target.value)))} value={admin}  type="select" name="admin">
 
         <option value={true}>SIM</option>
         <option value={false}>NÃO</option>

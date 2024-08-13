@@ -4,7 +4,7 @@ import del from './logos/delete.png'
 import { useParams } from "react-router-dom";
 import AddMonitor from "./components/addmonitor";
 import EditMonitor from "./components/editmonitor"
-import { api,SOCKET} from "./api";
+import { api,SOCKET} from "./api"
 import Swal from "sweetalert2";
 import { AuthContext } from "./authcontroller";
 import { RotatingLines } from "react-loader-spinner";

@@ -1,6 +1,7 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react';
+import './App.css';
 import Addlist from './components/addlist'
 import icon from './logos/redimensionar.png'
 import edit from './logos/edit.png'

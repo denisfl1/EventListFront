@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { api } from "../api";
-import { AuthContext } from "../authcontroller";
+import { AuthContext } from '../authcontroller';
 import { Participate_form } from "../styled_componets/participate_form";
 
 

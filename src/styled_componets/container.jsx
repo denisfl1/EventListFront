@@ -5,6 +5,13 @@ export const Table_Container = styled.div`
 
 margin: auto;
 
+
+${props => props.login && css`
+
+min-height: 75vh;
+
+`}
+
 ${props => props.participate && css`
   
   margin-top: 10px;
@@ -23,6 +30,8 @@ ${props => props.event_list && css`
  
  
   `}
+
+
 
 
   `

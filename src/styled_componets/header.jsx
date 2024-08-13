@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import img from '../logos/loremipsumlogo.png'
+import Menu from '../components/menu'
 
-export const Header_content = styled.header`
+ const Header_content = styled.div`
 
   display: flex;
   align-items: center;
@@ -14,13 +16,15 @@ export const Header_content = styled.header`
 
 `
 
- const Header = ({children})=>{
+ const Header = ()=>{
 
 
 return(
     <Header_content>
-
-            {children}
+               
+            <img src={img} width={"150px"}></img>
+            <Menu></Menu>
+         
 
     </Header_content>
 )
@@ -29,3 +33,4 @@ return(
 }
 
 export default Header
+

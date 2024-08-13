@@ -9,6 +9,28 @@ background-color: ${(props) => props.$cancel ? "#b33131" : 'rgb(7, 139, 139)'};
 cursor: pointer;
 
 
+${props=>props.login && css`
+
+  background-color: #137e7e9c;
+  color: rgb(177, 177, 177);
+  font-weight:bolder;
+  padding: 12px;
+  border-radius: 5px;
+  width: 235px;
+  margin-top: 11px;
+  margin-bottom: 8px;
+
+
+&:disabled{
+    background-color: grey;
+}
+
+
+
+`}
+
+
+
 ${props=>props.add_event && css`
 
   height: 50px;
@@ -104,6 +126,7 @@ ${props=>props.delete_users && css`
 
 
 `}
+
 
 
 

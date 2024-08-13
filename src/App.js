@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './header'
+import Header from './styled_componets/header'
 import {  Navigate } from 'react-router-dom';
 import { Routes,Route, BrowserRouter} from 'react-router-dom'
 import Login from './login';
