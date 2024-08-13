@@ -1,17 +1,13 @@
 import React,{useContext} from "react";
-import {useState,useEffect} from 'react'
-import img from './logos/loremipsumlogo1.png'
+import {useState} from 'react'
 import { AuthContext} from "./authcontroller";
 import { api } from "./api";
 import { Navigate } from "react-router-dom";
-import InputMask from "react-input-mask";
-import img1 from './logos/wallpapperlorem.jpg'
-import { Button } from "./styled_componets/button";
 import {Table_Container} from './styled_componets/container'
 import { Login_form } from "./styled_componets/login";
 
 
-    function Register(){
+function Register(){
 
 
     const [name,setName] = useState(" ")

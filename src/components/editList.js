@@ -33,8 +33,8 @@ function EditList(props){
                     setDate(translatedate)
                     setTime(time)
                     setExtraTime(extratime)
-
-                    if(extratime && extratime  === " - ")return setExtraChange(false)
+                    console.log(extratime)
+                    if(extratime && extratime  === "-")return setExtraChange(false)
                         return setExtraChange(true)
             
                 }

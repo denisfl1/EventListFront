@@ -1,21 +1,14 @@
 import React, { useContext } from "react";
-import {useState} from 'react'
-import img from './logos/loremipsumlogo1.png'
-import {Link, Navigate} from 'react-router-dom'
+import {useState} from 'react';
 import { AuthContext } from "./authcontroller";
 import { api } from "./api";
-import img1 from './logos/wallpapperlorem.jpg'
-import InputMask from "react-input-mask";
 import './App.css';
-import { Button } from "./styled_componets/button";
 import {Table_Container} from './styled_componets/container'
 import {  Login_form } from "./styled_componets/login";
 
 
-
 function Login(){
 
-   
     const [number,setNumber] = useState(" ")
     const [password,setPassword] = useState(" ")
     const [numberCheck,setNumberCheck] = useState({login:false,empty:false})
@@ -27,9 +20,7 @@ function Login(){
     })
 
   
-    
     const {logged} = useContext(AuthContext)
-
 
         const handleChangeNumber=(event)=>{
             const values = event.target.value
@@ -102,37 +93,15 @@ function Login(){
         loginlock = {loginlock}
         error = {error}
         handleSubmit = {handleSubmit}
-        handleChangePassword = {handleChangePassword}
-       
-        
-        ></Login_form>
+        handleChangePassword = {handleChangePassword}>
 
-</Table_Container>
 
-        // <div className="logincontainer">
-      
-        // <div id="login-login" className="login">
-            
-        //     <img className="spasso-picture" src={img} ></img>
-        //     <form className="login-form">
-           
-               
-        //     <InputMask className={error.number|| numberCheck.login || numberCheck.empty ? 'form-input invalid' : 'form-input '} mask="(99) 99999-9999" id="telefone" name="telefone" placeholder="Número de Celular" onChange={handleChangeNumber}/>
+        </Login_form>
 
-        //     <input className={error.password ? 'form-input invalid' : 'form-input '} name={"password"} onChange={handleChangePassword}  type="password" placeholder="Digite sua Senha" ></input>
 
-        //     <label className="labelerror">{numberCheck.empty ? "Campos Obrigatórios *" : " "}
-        //     {numberCheck.login ? "Número ou Senha Incorretos *" : " "}
-        //     </label>
-        //     <button disabled={loginlock} type="submit" onClick={handleSubmit}>LOGIN</button>
-        //     <span>Não possui conta?<Link className="registerclass" to="/register">Registre-se</Link></span>
-        //     </form>
-            
-        // </div>
+    </Table_Container>
 
-        // <img className="elementor-video" src={img1}></img>
-        // </div>
-
+    
 
     )
 
